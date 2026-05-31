@@ -1,52 +1,13 @@
 <section class="continents">
+  @for (continent of continents; track continent.name) {
     <button class="continent-card">
+      <h3>{{ continent.name }}</h3>
 
-
-        <h3>América</h3>
-
-            <div class="continent-info">
+      <div class="continent-info">
         <i class="fa-solid fa-location-dot"></i>
-        <span>35 países</span>
-    </div>
+
+        <span> {{ continent.countriesCount }} países </span>
+      </div>
     </button>
-
-    <button class="continent-card">
-        <h3>Europa</h3>
-
-    <div class="continent-info">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>35 países</span>
-    </div>
-    </button>
-
-    <button class="continent-card">
-
-
-        <h3>África</h3>
-
-           <div class="continent-info">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>35 países</span>
-    </div>
-    </button>
-
-    <button class="continent-card">
-     
-
-        <h3>Ásia</h3>
-    <div class="continent-info">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>35 países</span>
-    </div>
-    </button>
-
-    <button class="continent-card">
-
-        <h3>Oceania</h3>
-
-           <div class="continent-info">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>35 países</span>
-    </div>
-    </button>
+  }
 </section>
