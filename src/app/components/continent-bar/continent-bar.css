@@ -68,3 +68,18 @@
     color: var(--gray-500);
     font-size: .85rem;
 }
+
+.continent-card.active {
+    background-color: #2563eb; /* Um azul moderno (muda para a cor do teu projeto) */
+    color: white;              /* Texto branco para dar contraste */
+    border-color: #2563eb;
+    transform: scale(1.02);    /* Aumenta o cartão ligeiramente (efeito zoom) */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); /* Uma sombra suave com a cor de fundo */
+}
+
+/* Opcional: Garante que os textos e ícones menores dentro do botão também fiquem brancos */
+.continent-card.active h3,
+.continent-card.active .continent-info i,
+.continent-card.active .continent-info span {
+    color: white;
+}

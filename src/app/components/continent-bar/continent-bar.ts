@@ -13,6 +13,7 @@ export class ContinentBar implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
 
   continents: ContinentModel[] = [];
+  continenteAtivo: string = '';
 
   private readonly traducoesContinentes: Record<string, string> = {
     Africa: 'África',
@@ -45,11 +46,18 @@ export class ContinentBar implements OnInit {
 
       console.log('Continentes processados:', this.continents);
 
+      this.countryService.regiaoSelecionada$.subscribe(regiao => {
+        this.continenteAtivo = regiao; 
+        this.cdr.detectChanges();
+      });
+
       this.cdr.detectChanges();
     });
   }
 
   selecionarContinente(regiaoId: string) {
+    this.continenteAtivo = regiaoId;
     this.countryService.setRegiao(regiaoId);
+    
   }
 }

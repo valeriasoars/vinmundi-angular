@@ -1,15 +1,12 @@
 <section class="borders-section">
-
     <h2>Fronteiras</h2>
-
     <div class="borders">
-
         @for(border of borders; track border) {
-            <span class="border-tag">
+            <span class="border-tag" [routerLink]="['/country', border]">
                 {{ border }}
             </span>
+        } @empty {
+            <span>Este país não faz fronteira terrestre com nenhum outro.</span>
         }
-
     </div>
-
 </section>

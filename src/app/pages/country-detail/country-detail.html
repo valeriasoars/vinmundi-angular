@@ -1,88 +1,53 @@
 <nav class="navbar">
-  <a href="/" class="back-link">
+  <a routerLink="/" class="back-link">
     <i class="fa-solid fa-arrow-left"></i>
     Voltar
   </a>
 
-  <a href="/" class="logo">
+  <a routerLink="/" class="logo">
     <img src="logo.png" alt="Logo VinMundi" />
   </a>
 </nav>
 
+@if (country) {
 <main class="details-container">
-  <h1 class="country-title">Brasil</h1>
+  <h1 class="country-title">{{ country.name.common }}</h1>
 
   <section class="country-details">
     <div class="flag-container">
-      <img class="country-flag" src="https://flagcdn.com/w640/br.png" alt="Bandeira do Brasil" />
+      <img class="country-flag" [src]="country.flags.svg" [alt]="'Bandeira ' + country.name.common" />
     </div>
 
     <div class="country-info">
       <div class="details-grid">
         <article class="detail-card">
           <h3>Demografia</h3>
-
-          <p>
-            <strong>População:</strong>
-            203.062.512
-          </p>
-
-          <p>
-            <strong>Área:</strong>
-            8.515.767 km²
-          </p>
-
-          <p>
-            <strong>Região:</strong>
-            América do Sul
-          </p>
+          <p><strong>População:</strong> {{ country.population }}</p>
+          <p><strong>Área:</strong> {{ country.area }} km²</p>
+          <p><strong>Região:</strong> {{ country.region }}</p>
         </article>
 
         <article class="detail-card">
           <h3>Cultura</h3>
-
-          <p>
-            <strong>Idioma:</strong>
-            Português
-          </p>
-
-          <p>
-            <strong>Capital:</strong>
-            Brasília
-          </p>
-
-          <p>
-            <strong>Fuso Horário:</strong>
-            UTC -3
-          </p>
+          <p><strong>Idioma:</strong> {{ getIdiomas() }}</p>
+          <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+          <p><strong>Fuso Horário:</strong> {{ country.timezones?.[0] }}</p>
         </article>
 
         <article class="detail-card">
           <h3>Economia</h3>
-
-          <p>
-            <strong>Moeda:</strong>
-            Real Brasileiro
-          </p>
-
-          <p>
-            <strong>Código:</strong>
-            BRL
-          </p>
-
-          <p>
-            <strong>Prefixo:</strong>
-            +55
-          </p>
+          <p><strong>Moeda:</strong> {{ getMoedaNome() }}</p>
+          <p><strong>Código:</strong> {{ getMoedaCodigo() }}</p>
+          <p><strong>Prefixo:</strong> {{ getPrefixoTelefone() }}</p>
         </article>
       </div>
     </div>
   </section>
 
   <section>
-    <app-border-tag
-      [borders]="['Argentina', 'Uruguai', 'Paraguai', 'Bolívia', 'Peru', 'Colômbia', 'Venezuela']"
-    >
-    </app-border-tag>
+    <app-border-tag [borders]="country.borders || []"></app-border-tag>
   </section>
 </main>
+} @else {
+  <div class="loading">A carregar detalhes do país...</div>
+}
