@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-border-tag',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './border-tag.html',
   styleUrl: './border-tag.css',
 })
-export class BorderTag {}
+export class BorderTag {
+  @Input() borders: string[] = [];
+}

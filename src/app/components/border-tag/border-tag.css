@@ -1,0 +1,43 @@
+.borders-section {
+    padding: 2rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+.borders-section h2 {
+    margin-bottom: 1.5rem;
+
+    color: var(--gray-900);
+
+    font-size: 1.4rem;
+}
+
+.borders {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: .75rem;
+}
+
+.border-tag {
+    padding: .75rem 1rem;
+
+    border-radius: 999px;
+
+    background: var(--gray-100);
+
+    border: 1px solid var(--gray-200);
+
+    color: var(--gray-900);
+
+    cursor: pointer;
+
+    transition: all .3s ease;
+}
+
+.border-tag:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}

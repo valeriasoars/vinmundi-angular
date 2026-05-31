@@ -1,1 +1,88 @@
-<p>country-detail works!</p>
+<nav class="navbar">
+  <a href="/" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Voltar
+  </a>
+
+  <a href="/" class="logo">
+    <img src="logo.png" alt="Logo VinMundi" />
+  </a>
+</nav>
+
+<main class="details-container">
+  <h1 class="country-title">Brasil</h1>
+
+  <section class="country-details">
+    <div class="flag-container">
+      <img class="country-flag" src="https://flagcdn.com/w640/br.png" alt="Bandeira do Brasil" />
+    </div>
+
+    <div class="country-info">
+      <div class="details-grid">
+        <article class="detail-card">
+          <h3>Demografia</h3>
+
+          <p>
+            <strong>População:</strong>
+            203.062.512
+          </p>
+
+          <p>
+            <strong>Área:</strong>
+            8.515.767 km²
+          </p>
+
+          <p>
+            <strong>Região:</strong>
+            América do Sul
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Cultura</h3>
+
+          <p>
+            <strong>Idioma:</strong>
+            Português
+          </p>
+
+          <p>
+            <strong>Capital:</strong>
+            Brasília
+          </p>
+
+          <p>
+            <strong>Fuso Horário:</strong>
+            UTC -3
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Economia</h3>
+
+          <p>
+            <strong>Moeda:</strong>
+            Real Brasileiro
+          </p>
+
+          <p>
+            <strong>Código:</strong>
+            BRL
+          </p>
+
+          <p>
+            <strong>Prefixo:</strong>
+            +55
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <app-border-tag
+      [borders]="['Argentina', 'Uruguai', 'Paraguai', 'Bolívia', 'Peru', 'Colômbia', 'Venezuela']"
+    >
+    </app-border-tag>
+  </section>
+</main>

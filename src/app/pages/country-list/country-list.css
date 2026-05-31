@@ -1,0 +1,37 @@
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.empty-state img {
+    width: 300px;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    max-width: 500px;
+
+    font-size: 1rem;
+    line-height: 1.6;
+
+    color: var(--gray-500);
+}
+
+
+
+.countries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 240px);
+
+    justify-content: center;
+
+    gap: 1.5rem;
+
+    padding: 2rem;
+}

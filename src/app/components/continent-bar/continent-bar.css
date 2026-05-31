@@ -1,0 +1,70 @@
+.continents {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 180px));
+
+    justify-content: center;
+
+    gap: 1rem;
+
+    padding: 2rem;
+}
+
+.continent-card {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border: 1px solid var(--gray-200);
+    border-radius: 30px;
+
+    text-align: left;
+    cursor: pointer;
+
+    transition: all .3s ease;
+}
+
+.continent-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background-color: var(--primary-color);
+    color: var(--gray-100);
+}
+
+.continent-card:hover h3,
+.continent-card:hover .continent-info {
+    color: var(--white);
+}
+
+
+.continent-card h3 {
+    width: 100%;
+    text-align: center;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.continent-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+
+    color: var(--gray-500);
+    font-size: .85rem;
+}
+
+.continent-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+
+    color: var(--gray-500);
+    font-size: .85rem;
+}

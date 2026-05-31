@@ -1,1 +1,31 @@
-<p>country-card works!</p>
+<div
+    class="country-card"
+    [routerLink]="['/country', country.code]">
+
+    <img
+        [src]="country.flag"
+        [alt]="country.name"
+        class="country-flag">
+
+    <div class="country-content">
+
+        <h3>{{ country.name }}</h3>
+
+        <p>
+            <strong>População:</strong>
+            {{ country.population }}
+        </p>
+
+        <p>
+            <strong>Capital:</strong>
+            {{ country.capital }}
+        </p>
+
+        <p>
+            <strong>Região:</strong>
+            {{ country.region }}
+        </p>
+
+    </div>
+
+</div>
