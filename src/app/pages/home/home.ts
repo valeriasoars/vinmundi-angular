@@ -11,6 +11,5 @@ import { CountryList } from "../country-list/country-list";
   styleUrl: './home.css',
 })
 export class Home {
-countries = [];
-  
+
 }

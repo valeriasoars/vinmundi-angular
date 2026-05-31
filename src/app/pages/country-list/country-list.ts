@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { CountryCard } from "../../components/country-card/country-card";
+import { Component, inject } from '@angular/core';
+import { CountryCard } from '../../components/country-card/country-card';
+import { Country } from '../../service/country/country';
+import { CountryModel } from '../../models/country-model';
 
 @Component({
   selector: 'app-country-list',
@@ -8,38 +10,24 @@ import { CountryCard } from "../../components/country-card/country-card";
   styleUrl: './country-list.css',
 })
 export class CountryList {
-  countries = [
-    {
-      name: 'Brasil',
-      code: 'BRA',
-      flag: 'https://flagcdn.com/w640/br.png',
-      population: 203062512,
-      capital: 'Brasília',
-      region: 'América'
-    },
-    {
-      name: 'Estados Unidos',
-      code: 'BRA2',
-      flag: 'https://flagcdn.com/w640/us.png',
-      population: 340110988,
-      capital: 'Washington',
-      region: 'América'
-    },
-    {
-      name: 'França',
-      code: 'BRA3',
-      flag: 'https://flagcdn.com/w640/fr.png',
-      population: 68374000,
-      capital: 'Paris',
-      region: 'Europa'
-    },
-    {
-      name: 'Japão',
-      code: 'BRA4',
-      flag: 'https://flagcdn.com/w640/jp.png',
-      population: 123900000,
-      capital: 'Tóquio',
-      region: 'Ásia'
-    }
-  ];
+  private readonly countryService = inject(Country);
+
+  countries: CountryModel[] = [];
+
+ngOnInit() {
+    this.countryService.regiaoSelecionada$.subscribe(regiao => {
+      if (regiao) {
+        // Agora podemos usar CountryModel[] diretamente aqui!
+        this.countryService.getCountriesByRegion(regiao).subscribe((dados: CountryModel[]) => {
+          
+          this.countries = dados.map(pais => ({
+            ...pais, // Copia todos os dados que já vêm perfeitos da API
+            capital: pais.capital || [], // Previne erro se o país não tiver capital
+            borders: pais.borders || []  // Previne erro se o país não tiver fronteiras
+          }));
+          
+        });
+      }
+    });
+  }
 }

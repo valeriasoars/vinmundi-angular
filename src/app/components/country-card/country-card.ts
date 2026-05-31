@@ -1,15 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-
-export interface Country {
-  name: string;
-  flag: string;
-  population: number;
-  capital: string;
-  region: string;
-}
+import { CountryModel } from '../../models/country-model';
 
 @Component({
   selector: 'app-country-card',
@@ -18,12 +10,5 @@ export interface Country {
   styleUrl: './country-card.css',
 })
 export class CountryCard {
-@Input() country!: {
-    name: string;
-    code: string;
-    flag: string;
-    population: number;
-    capital: string;
-    region: string;
-  };
+@Input() country!: CountryModel;
 }

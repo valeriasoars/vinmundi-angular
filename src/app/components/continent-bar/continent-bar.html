@@ -1,6 +1,6 @@
 <section class="continents">
   @for (continent of continents; track continent.name) {
-    <button class="continent-card">
+    <button class="continent-card" (click)="selecionarContinente(continent.id)">
       <h3>{{ continent.name }}</h3>
 
       <div class="continent-info">

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Country } from '../../service/country/country';
+import { ContinentModel } from '../../models/continent-model';
 
 @Component({
   selector: 'app-continent-bar',
@@ -11,10 +12,7 @@ export class ContinentBar implements OnInit {
   private readonly countryService = inject(Country);
   private readonly cdr = inject(ChangeDetectorRef);
 
-  continents: {
-    name: string;
-    countriesCount: number;
-  }[] = [];
+  continents: ContinentModel[] = [];
 
   private readonly traducoesContinentes: Record<string, string> = {
     Africa: 'África',
@@ -37,16 +35,21 @@ export class ContinentBar implements OnInit {
         {} as Record<string, number>,
       );
 
-      this.continents = Object.entries(grouped)
-        .map(([name, countriesCount]) => ({
-          name: this.traducoesContinentes[name] || name,
-          countriesCount,
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+          this.continents = Object.entries(grouped)
+          .map(([id, countriesCount]) => ({
+            id: id, 
+            name: this.traducoesContinentes[id] || id, 
+            countriesCount
+          }));
+       
 
       console.log('Continentes processados:', this.continents);
 
       this.cdr.detectChanges();
     });
+  }
+
+  selecionarContinente(regiaoId: string) {
+    this.countryService.setRegiao(regiaoId);
   }
 }
