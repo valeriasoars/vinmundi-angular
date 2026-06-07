@@ -1,15 +1,21 @@
 <nav class="navbar">
-    <a href="/" class="logo">
-        <img src="logo.png" alt="Logo VinMundi">
+  <a href="/" class="logo">
+    <img src="logo.png" alt="Logo VinMundi" />
+  </a>
+
+  <div class="navbar-actions">
+    <a [routerLink]="['/quiz']" class="btn-quiz">
+      <i class="fa-solid fa-gamepad"></i> Quiz Geográfico
     </a>
 
     <div class="search-box">
-        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input
-            type="search"
-            placeholder="Buscar país..."
-            aria-label="Buscar país"
-            (input)="onSearch($event)"
-        >
+      <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input
+        type="search"
+        placeholder="Buscar país..."
+        aria-label="Buscar país"
+        (input)="onSearch($event)"
+      />
     </div>
+  </div>
 </nav>

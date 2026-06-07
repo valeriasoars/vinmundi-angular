@@ -13,6 +13,32 @@
     width: auto;
 }
 
+.navbar-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-quiz {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--secondary-color, #10b981); 
+  color: var(--white, #ffffff);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 99px; 
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+   cursor: pointer;
+}
+
+.btn-quiz:hover {
+  transform: translateY(-2px);
+  background-color: white; 
+  color: black ;
+}
+
 .search-box {
     display: flex;
     align-items: center;
@@ -69,20 +95,36 @@
 /* Mobile */
 @media (max-width: 576px) {
     .navbar {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap; 
+        justify-content: space-between;
+    }
+
+    .navbar-actions {
+        /* Desfaz o agrupamento no celular para organizar os itens individualmente */
+        display: contents; 
     }
 
     .logo {
-        display: flex;
-        justify-content: center;
+        order: 1;
+    }
+
+    .btn-quiz {
+        order: 2; /* Fica na linha de cima, na direita */
+        padding: 0.6rem 0.8rem;
+    }
+
+    .btn-quiz span { 
+        display: none;
+    }
+
+    .search-box {
+        order: 3; /* Empurra para a linha de baixo */
+        width: 100%;
+        margin-top: 0.8rem;
     }
 
     .logo img {
         height: 45px;
-    }
-
-    .search-box {
-        width: 100%;
     }
 }

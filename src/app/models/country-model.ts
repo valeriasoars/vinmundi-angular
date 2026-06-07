@@ -17,4 +17,6 @@ export interface CountryModel {
   cca3: string;
 
   borders: string[];
+  
+  translations?: any;
 }

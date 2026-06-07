@@ -19,7 +19,7 @@ export class Country {
 
   getAllCountries(): Observable<CountryModel[]>{
     return this.http.get<CountryModel[]>(
-      `${this.apiUrl}/all?fields=name,region`
+      `${this.apiUrl}/all?fields=name,region,flags,translations`
     )
   }
 
