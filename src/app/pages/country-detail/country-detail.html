@@ -44,9 +44,41 @@
     </div>
   </section>
 
-  <section>
+
+  @if (wikiData) {
+  <section class="wiki-section">
+    <h2>📖 Sobre o País</h2>
+    
+    <div class="wiki-card">
+      @if (wikiData.originalimage?.source) {
+        <div class="wiki-image-container">
+        <img 
+              [src]="imagemPaisUrl" 
+              [alt]="wikiData.title" 
+              class="wiki-image">
+          </div>
+        }
+
+      <div class="wiki-content">
+        <h3 class="wiki-description">{{ wikiData.description }}</h3>
+        
+        <p class="wiki-extract">{{ wikiData.extract }}</p>
+        
+        <a [href]="wikiData.content_urls.desktop.page" target="_blank" class="wiki-btn">
+          Ler artigo completo na Wikipedia <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+}
+
+
+    <section>
     <app-border-tag [borders]="country.borders || []"></app-border-tag>
   </section>
+
+
+
 </main>
 } @else {
   <div class="loading">A carregar detalhes do país...</div>
