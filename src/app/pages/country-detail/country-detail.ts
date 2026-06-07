@@ -3,6 +3,7 @@ import { BorderTag } from "../../components/border-tag/border-tag";
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Country } from '../../service/country/country';
 import { Wikipedia } from '../../service/wikipedia/wikipedia';
+import { Unsplash } from '../../service/unsplash/unsplash';
 
 @Component({
   selector: 'app-country-detail',
@@ -14,6 +15,7 @@ export class CountryDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private countryService = inject(Country);
   private wikiService = inject(Wikipedia);
+  private unsplashService = inject(Unsplash);
   private cdr = inject(ChangeDetectorRef);
 
   country: any = null;
@@ -33,11 +35,15 @@ export class CountryDetail implements OnInit {
 
   carregarDetalhes(code: string) {
     this.wikiData = null;
+    this.imagemPaisUrl = '';
     this.countryService.getCountryByCode(code).subscribe({
       next: (dados) => {
       this.country = dados[0]; 
       const nomeEmPortugues = this.country.translations?.por?.common || this.country.name.common;
       this.buscarWikipedia(nomeEmPortugues);
+
+      const nomeEn = this.country.name.common;
+      this.buscarFoto(nomeEn);
       this.cdr.detectChanges();
       window.scrollTo(0, 0); 
       },
@@ -79,44 +85,17 @@ export class CountryDetail implements OnInit {
         console.error('Artigo da Wikipedia não encontrado para:', nome);
       }
     })
+  }
 
-    this.wikiService.getImagensPais(nome).subscribe({
-    next: (media) => {
-      // Previne erro caso a API não devolva o array 'items'
-      if (!media || !media.items) return;
 
-      const fotosReais = media.items.filter((item: any) => {
-        const titulo = item.title.toLowerCase();
-        
-        return item.type === 'image' && 
-               !titulo.includes('.svg') &&     // Remove mapas em vetor e ícones
-               !titulo.includes('map') &&      // Remove mapas
-               !titulo.includes('bandeira') && // Remove bandeiras
-               !titulo.includes('flag') && 
-               !titulo.includes('brasão') &&   // Remove brasões
-               !titulo.includes('coat');
-      });
-
-      // VAMOS ESPIAR O QUE A API DEVOLVEU:
-      console.log('Todas as fotos encontradas:', fotosReais);
-
-      // Verifica se encontrou alguma foto e se ela tem o array de links (srcset)
-      if (fotosReais.length > 0 && fotosReais[0].srcset && fotosReais[0].srcset.length > 0) {
-        
-        // Pega o link da foto
-        let link = fotosReais[0].srcset[0].src;
-        
-        // Corrige o link se vier sem https
-        this.imagemPaisUrl = link.startsWith('//') ? 'https:' + link : link;
-        
-        console.log('Link final da imagem:', this.imagemPaisUrl);
-        
-        this.cdr.detectChanges();
-      } else {
-        console.log('Nenhuma foto válida sobreviveu ao filtro.');
+  buscarFoto(nome: string) {
+    this.unsplashService.getFotoPais(nome).subscribe({
+      next: (dados) => {
+        if (dados.results && dados.results.length > 0) {
+          this.imagemPaisUrl = dados.results[0].urls.regular;
+          this.cdr.detectChanges();
+        }
       }
-    },
-    error: (erro) => console.error('Erro ao buscar imagens na Wikipedia:', erro)
-  });
+    });
   }
 }

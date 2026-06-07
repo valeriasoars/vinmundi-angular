@@ -188,34 +188,7 @@
     color: var(--white);
 }
 
-/* RESPONSIVO */
-
-@media (max-width: 900px) {
-
-    .details-container {
-        padding: 1rem;
-    }
-
-    .country-title {
-        text-align: center;
-        font-size: 2rem;
-    }
-
-    .country-details {
-        grid-template-columns: 1fr;
-
-        gap: 2rem;
-    }
-
-    .country-flag {
-        max-width: 100%;
-    }
-
-    .borders-section {
-        padding: 1.5rem;
-    }
-}
-
+/* WIKI */
 
 .wiki-section {
   margin-top: 3rem;
@@ -272,4 +245,51 @@
 
 .wiki-btn:hover {
   background-color: #e5e7eb;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+
+    .details-container {
+        padding: 1rem;
+    }
+
+    .country-title {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .country-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .country-flag {
+        max-width: 100%;
+    }
+
+    .borders-section {
+        padding: 1.5rem;
+    }
+
+    /* Novas regras para a seção da Wikipedia no celular */
+    .wiki-card {
+        flex-direction: column; /* Coloca a imagem em cima e o texto embaixo */
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .wiki-image-container {
+        width: 100%; /* A imagem ocupa toda a largura disponível do card */
+    }
+
+    .wiki-image {
+        height: auto; /* Mantém a proporção da imagem sem esticar */
+        max-height: 250px; /* Limita a altura para não ocupar a tela inteira */
+    }
+    
+    .navbar {
+        padding: 1rem; /* Reduz um pouco o espaçamento da barra superior no celular */
+    }
 }
