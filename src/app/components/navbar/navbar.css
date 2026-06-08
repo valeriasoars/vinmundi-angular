@@ -13,6 +13,14 @@
     width: auto;
 }
 
+.btn-brasil-nav {
+  background-color: #22c55e !important; 
+}
+
+.btn-brasil-nav:hover {
+  background-color: #16a34a !important;
+}
+
 .navbar-actions {
   display: flex;
   gap: 1rem;

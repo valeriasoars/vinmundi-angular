@@ -1,0 +1,55 @@
+<div class="hub-container">
+  
+  <div class="hub-header">
+    @if (ecraAtual === 'menu') {
+      <a routerLink="/" class="back-link"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+    } @else {
+      <button class="back-link" (click)="voltarAoMenu()"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu do Brasil</button>
+    }
+  </div>
+
+  @if (ecraAtual === 'menu') {
+    <div class="hub-menu">
+      <h2>🇧🇷 Central da Geografia do Brasil</h2>
+      <p>Escolhe uma atividade para explorar o nosso país:</p>
+      
+      <div class="cards-grid">
+        <div class="hub-card" (click)="abrirJogoRegioes()">
+          <i class="fa-solid fa-map"></i>
+          <h3>Desafio das Regiões</h3>
+          <p>Testa os teus conhecimentos clicando no mapa interativo.</p>
+        </div>
+
+        <div class="hub-card disabled">
+          <i class="fa-solid fa-city"></i>
+          <h3>Adivinhe o Estado</h3>
+          <p>(Em breve) Qual estado pertence esta capital?</p>
+        </div>
+
+        <div class="hub-card" (click)="ecraAtual = 'info'">
+          <i class="fa-solid fa-book-open"></i>
+          <h3>Biblioteca Geográfica</h3>
+          <p>Lê dados curiosos e estatísticas sobre o Brasil.</p>
+        </div>
+      </div>
+    </div>
+  }
+
+@if (ecraAtual === 'quiz-regiao') {
+    <app-region-brazil-quiz (voltar)="voltarAoMenu()"></app-region-brazil-quiz>
+  }
+
+  @if (ecraAtual === 'info') {
+    <div class="info-board">
+      <h2>Fatos sobre o Brasil</h2>
+      <p>Em breve...</p>
+    </div>
+  }
+
+  @if (ecraAtual === 'info') {
+    <div class="info-board">
+      <h2>Fatos sobre o Brasil</h2>
+      <p>Aqui vais poder colocar a API do IBGE no futuro!</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,55 @@
+<div class="game-board">
+  @if (!jogoFinalizado) {
+    <div class="progress-badge">
+      Falta preencher {{ regioesPendentes.length }} {{ regioesPendentes.length === 1 ? 'região' : 'regiões' }}
+    </div>
+
+    <h2 class="question-title">
+      Clique na Região: <span class="target-region">{{ regiaoAlvo }}</span>
+    </h2>
+
+    <div class="map-wrapper">
+      <app-mapa-brasil 
+        [regiaoAlvo]="regiaoAlvo"
+        [regiaoSelecionada]="regiaoSelecionada"
+        [statusResposta]="statusResposta"
+        [regioesCompletadas]="regioesCompletadas"
+        (regiaoClicada)="receberCliqueDoMapa($event)">
+      </app-mapa-brasil>
+    </div>
+  }
+
+  @if (jogoFinalizado) {
+    <div class="end-screen">
+      <h2>Mapa Completo! 🏁</h2>
+      
+      <div class="score-display">
+        <div class="score-box">
+          <span class="score-label">Total de Erros</span>
+          <span class="score-number" [style.color]="erros === 0 ? '#22c55e' : '#ef4444'">
+            {{ erros }}
+          </span>
+        </div>
+      </div>
+
+      <p class="score-message">
+        @if (erros === 0) {
+          Excepcional! Jogo perfeito, você não errou nenhuma vez! 🏆🇧🇷
+        } @else if (erros <= 2) {
+          Muito bom! Você sabe muito bem onde fica cada região. 🗺️
+        } @else {
+          O mapa está completo, mas você teve alguns deslizes. Tente novamente para zerar os erros! 💪
+        }
+      </p>
+
+      <div class="action-buttons">
+        <button class="btn-game btn-br" (click)="iniciarJogo()">
+          <i class="fa-solid fa-rotate-right"></i> Jogar Novamente
+        </button>
+        <button class="btn-game btn-exit" (click)="sairDoJogo()">
+          <i class="fa-solid fa-arrow-left"></i> Voltar ao Menu
+        </button>
+      </div>
+    </div>
+  }
+</div>

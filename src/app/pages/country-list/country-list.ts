@@ -16,7 +16,6 @@ export class CountryList implements OnInit {
   countries: CountryModel[] = [];
 
 ngOnInit() {
-    // FLUXO 1: Escuta a seleção de continentes
     this.countryService.regiaoSelecionada$.subscribe(regiao => {
       if (regiao) {
         this.countryService.getCountriesByRegion(regiao).subscribe((dados) => {
@@ -25,7 +24,6 @@ ngOnInit() {
       }
     });
 
-    // FLUXO 2: Escuta a digitação na barra de pesquisa
     this.countryService.termoBusca$.subscribe(termo => {
       if (termo.trim().length > 0) {
         this.countryService.getCountriesByName(termo).subscribe({
@@ -33,20 +31,17 @@ ngOnInit() {
             this.atualizarLista(dados);
           },
           error: () => {
-            // Se a API devolver erro (ex: 404 se o país não existir), limpa a lista
             this.countries = [];
             this.cdr.detectChanges();
           }
         });
       } else {
-        // Se a barra de pesquisa for esvaziada, limpa o ecrã para voltar ao Empty State original
         this.countries = [];
         this.cdr.detectChanges();
       }
     });
   }
 
-  // Função auxiliar para evitar repetição de código mapeamento
   private atualizarLista(dados: CountryModel[]) {
     this.countries = dados.map(pais => ({
       ...pais,

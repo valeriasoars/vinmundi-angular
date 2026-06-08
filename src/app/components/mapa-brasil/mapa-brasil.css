@@ -1,0 +1,56 @@
+.mapa-br {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Propriedades visuais do mapa geométrico */
+.regiao-polygon {
+  fill: #e5e7eb; /* Cor padrão cinza */
+  stroke: #ffffff; /* Bordas brancas entre regiões */
+  stroke-width: 3;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.regiao-polygon:hover {
+  fill: #d1d5db; /* Escurece no hover para mostrar que é clicável */
+}
+
+/* Nomes textuais dentro do mapa */
+.map-label {
+  fill: #4b5563;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none; /* Faz o clique passar através do texto e atingir o mapa */
+  text-anchor: middle;
+}
+
+/* Respostas visuais controladas pelo componente Pai */
+.regiao-polygon.completed polygon,
+.regiao-polygon.completed path {
+  fill: #22c55e !important;
+  stroke: #ffffff;
+}
+
+/* Remove a "mãozinha" de clique nas regiões que já estão verdes */
+.regiao-polygon.completed {
+  cursor: default;
+}
+
+/* Força o vermelho se errou */
+.regiao-polygon.wrong polygon,
+.regiao-polygon.wrong path {
+  fill: #ef4444 !important;
+}
+
+/* Efeito de piscar a resposta certa para ajudar */
+.regiao-polygon.blink polygon,
+.regiao-polygon.blink path {
+  animation: piscarAjuda 0.6s alternate infinite;
+}
+
+@keyframes piscarAjuda {
+  from { fill: #e5e7eb; }
+  to { fill: #3b82f6; } /* Azul */
+}

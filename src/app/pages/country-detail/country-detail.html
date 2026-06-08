@@ -10,76 +10,73 @@
 </nav>
 
 @if (country) {
-<main class="details-container">
-  <h1 class="country-title">{{ country.name.common }}</h1>
+  <main class="details-container">
+    <h1 class="country-title">{{ country.name.common }}</h1>
 
-  <section class="country-details">
-    <div class="flag-container">
-      <img class="country-flag" [src]="country.flags.svg" [alt]="'Bandeira ' + country.name.common" />
-    </div>
-
-    <div class="country-info">
-      <div class="details-grid">
-        <article class="detail-card">
-          <h3>Demografia</h3>
-          <p><strong>População:</strong> {{ country.population }}</p>
-          <p><strong>Área:</strong> {{ country.area }} km²</p>
-          <p><strong>Região:</strong> {{ country.region }}</p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Cultura</h3>
-          <p><strong>Idioma:</strong> {{ getIdiomas() }}</p>
-          <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
-          <p><strong>Fuso Horário:</strong> {{ country.timezones?.[0] }}</p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Economia</h3>
-          <p><strong>Moeda:</strong> {{ getMoedaNome() }}</p>
-          <p><strong>Código:</strong> {{ getMoedaCodigo() }}</p>
-          <p><strong>Prefixo:</strong> {{ getPrefixoTelefone() }}</p>
-        </article>
+    <section class="country-details">
+      <div class="flag-container">
+        <img
+          class="country-flag"
+          [src]="country.flags.svg"
+          [alt]="'Bandeira ' + country.name.common"
+        />
       </div>
-    </div>
-  </section>
 
+      <div class="country-info">
+        <div class="details-grid">
+          <article class="detail-card">
+            <h3>Demografia</h3>
+            <p><strong>População:</strong> {{ country.population }}</p>
+            <p><strong>Área:</strong> {{ country.area }} km²</p>
+            <p><strong>Região:</strong> {{ country.region }}</p>
+          </article>
 
-  @if (wikiData) {
-  <section class="wiki-section">
-    <h2>📖 Sobre o País</h2>
-    
-    <div class="wiki-card">
-      @if (wikiData.originalimage?.source) {
-        <div class="wiki-image-container">
-        <img 
-              [src]="imagemPaisUrl" 
-              [alt]="wikiData.title" 
-              class="wiki-image">
+          <article class="detail-card">
+            <h3>Cultura</h3>
+            <p><strong>Idioma:</strong> {{ getIdiomas() }}</p>
+            <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+            <p><strong>Fuso Horário:</strong> {{ country.timezones?.[0] }}</p>
+          </article>
+
+          <article class="detail-card">
+            <h3>Economia</h3>
+            <p><strong>Moeda:</strong> {{ getMoedaNome() }}</p>
+            <p><strong>Código:</strong> {{ getMoedaCodigo() }}</p>
+            <p><strong>Prefixo:</strong> {{ getPrefixoTelefone() }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    @if (wikiData) {
+      <section class="wiki-section">
+        <h2>📖 Sobre o País</h2>
+
+        <div class="wiki-card">
+          @if (wikiData.originalimage?.source) {
+            <div class="wiki-image-container">
+              <img [src]="imagemPaisUrl" [alt]="wikiData.title" class="wiki-image" />
+            </div>
+          }
+
+          <div class="wiki-content">
+            <h3 class="wiki-description">{{ wikiData.description }}</h3>
+
+            <p class="wiki-extract">{{ wikiData.extract }}</p>
+
+            <a [href]="wikiData.content_urls.desktop.page" target="_blank" class="wiki-btn">
+              Ler artigo completo na Wikipedia
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
-        }
-
-      <div class="wiki-content">
-        <h3 class="wiki-description">{{ wikiData.description }}</h3>
-        
-        <p class="wiki-extract">{{ wikiData.extract }}</p>
-        
-        <a [href]="wikiData.content_urls.desktop.page" target="_blank" class="wiki-btn">
-          Ler artigo completo na Wikipedia <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-}
-
+        </div>
+      </section>
+    }
 
     <section>
-    <app-border-tag [borders]="country.borders || []"></app-border-tag>
-  </section>
-
-
-
-</main>
+      <app-border-tag [borders]="country.borders || []"></app-border-tag>
+    </section>
+  </main>
 } @else {
   <div class="loading">A carregar detalhes do país...</div>
 }
