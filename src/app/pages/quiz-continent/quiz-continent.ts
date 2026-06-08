@@ -1,23 +1,30 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Country } from '../../service/country/country';
 import { CountryModel } from '../../models/country-model';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-quiz',
-  imports: [],
-  templateUrl: './quiz.html',
-  styleUrl: './quiz.css',
+  selector: 'app-quiz-continent',
+  imports: [RouterLink],
+  templateUrl: './quiz-continent.html',
+  styleUrl: './quiz-continent.css',
 })
-export class Quiz implements OnInit{
-  private readonly countryService = inject(Country);
+export class QuizContinent implements OnInit {
+private readonly countryService = inject(Country);
   private readonly cdr = inject(ChangeDetectorRef);
 
   todosPaises: CountryModel[] = [];
   paisCorreto: CountryModel | null = null;
   opcoes: string[] = [];
 
+  nomePaisAtual: string = '';
   bandeiraUrl: string = '';
-  nomeCorretoAtual: string = '';
+  respostaCorretaAtual: string = '';
+
+  listaContinentes = [
+    'África', 'América do Sul', 'América do Norte', 
+    'América Central', 'Caribe', 'Ásia', 'Europa', 'Oceania'
+  ];
 
   carregando: boolean = true;
   jogoIniciado: boolean = false;
@@ -35,8 +42,6 @@ export class Quiz implements OnInit{
         this.todosPaises = dados;
         this.carregando = false;
         this.cdr.detectChanges();
-        
-        console.log('Total de países carregados para o jogo:', this.todosPaises.length);
       },
       error: (erro) => {
         console.error('Erro ao buscar os países:', erro);
@@ -54,6 +59,26 @@ export class Quiz implements OnInit{
     this.gerarRodada();
   }
 
+  obterRegiaoExata(pais: any): string {
+    const subregiao = pais?.subregion || '';
+    const regiao = pais?.region || '';
+
+    if (subregiao === 'South America') return 'América do Sul';
+    if (subregiao === 'North America') return 'América do Norte';
+    if (subregiao === 'Central America') return 'América Central';
+    if (subregiao === 'Caribbean') return 'Caribe';
+
+    const mapaRegioes: { [key: string]: string } = {
+      'Africa': 'África',
+      'Asia': 'Ásia',
+      'Europe': 'Europa',
+      'Oceania': 'Oceania',
+      'Antarctic': 'Antártida'
+    };
+
+    return mapaRegioes[regiao] || regiao || 'Desconhecido';
+  }
+
   gerarRodada() {
     if (this.rodadaAtual >= this.totalRodadas) {
       this.jogoFinalizado = true;
@@ -68,32 +93,27 @@ export class Quiz implements OnInit{
     const indexCorreto = Math.floor(Math.random() * this.todosPaises.length);
     this.paisCorreto = this.todosPaises[indexCorreto];
 
-    this.nomeCorretoAtual = this.paisCorreto?.translations?.por?.common || 
-                            this.paisCorreto?.name?.common || 
-                            (typeof this.paisCorreto?.name === 'string' ? this.paisCorreto.name : '') || 
-                            'País Desconhecido';
+    this.nomePaisAtual = this.paisCorreto?.translations?.por?.common || 
+                         this.paisCorreto?.name?.common || 
+                         (typeof this.paisCorreto?.name === 'string' ? this.paisCorreto.name : '') || 
+                         'País Desconhecido';
 
     this.bandeiraUrl = this.paisCorreto?.flags?.svg || 
                        this.paisCorreto?.flags?.png || 
                        (typeof this.paisCorreto?.flags === 'string' ? this.paisCorreto.flags : '');
-    console.log('País Sorteado:', this.paisCorreto);
-    console.log('Link da Bandeira:', this.bandeiraUrl);
-
-    let novasOpcoes = [this.nomeCorretoAtual];
+    this.respostaCorretaAtual = this.obterRegiaoExata(this.paisCorreto);
+    
+    let novasOpcoes = [this.respostaCorretaAtual];
 
     while (novasOpcoes.length < 4) {
-      const indexAleatorio = Math.floor(Math.random() * this.todosPaises.length);
-      const paisAleatorio = this.todosPaises[indexAleatorio];
-      
-      const nomeAleatorio = paisAleatorio?.translations?.por?.common || 
-                            paisAleatorio?.name?.common || 
-                            (typeof paisAleatorio?.name === 'string' ? paisAleatorio.name : '');
+      const indexAleatorio = Math.floor(Math.random() * this.listaContinentes.length);
+      const continenteAleatorio = this.listaContinentes[indexAleatorio];
 
-      if (nomeAleatorio && !novasOpcoes.includes(nomeAleatorio)) {
-        novasOpcoes.push(nomeAleatorio);
+      if (!novasOpcoes.includes(continenteAleatorio)) {
+        novasOpcoes.push(continenteAleatorio);
       }
     }
-
+    
     this.opcoes = this.embaralharArray(novasOpcoes);
     this.cdr.detectChanges();
   }
@@ -110,11 +130,13 @@ export class Quiz implements OnInit{
     if (this.jaRespondeu) return;
 
     this.jaRespondeu = true;
-    this.acertou = (opcaoSelecionada === this.nomeCorretoAtual);
+    this.acertou = (opcaoSelecionada === this.respostaCorretaAtual);
     
     if (this.acertou) {
       this.pontuacao++;
     }
     this.cdr.detectChanges();
   }
+
 }
+

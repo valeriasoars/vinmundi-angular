@@ -1,0 +1,95 @@
+<div class="quiz-container">
+
+    <div class="quiz-header">
+    <a routerLink="/" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Voltar
+    </a>
+  </div>
+  
+  @if (carregando) {
+    <div class="loading-state">
+      <h2>A preparar o jogo...</h2>
+    </div>
+  }
+
+  @if (!carregando && !jogoIniciado) {
+    <div class="start-screen">
+      <h2>🌍 Quiz de Continentes</h2>
+      <p> Sabe o continente de cada pais?</p>
+      <button class="btn-start btn-continente" (click)="iniciarJogo()">Começar Desafio (10 Rodadas)</button>
+    </div>
+  }
+
+  @if (jogoIniciado && !jogoFinalizado) {
+    <div class="game-board">
+      
+      <div class="progress-badge">
+        Rodada {{ rodadaAtual }} de {{ totalRodadas }}
+      </div>
+
+      <h2 class="question-title">A que continente pertence: <strong>{{ nomePaisAtual }}</strong>?</h2>
+      
+      <div class="flag-wrapper">
+        <img [src]="bandeiraUrl" alt="Bandeira do País" class="mystery-flag">
+      </div>
+
+      <div class="options-grid">
+        @for (opcao of opcoes; track opcao) {
+          <button 
+            class="btn-option" 
+            [class.correct]="jaRespondeu && opcao === respostaCorretaAtual"
+            [class.wrong]="jaRespondeu && opcao !== respostaCorretaAtual"
+            [disabled]="jaRespondeu"
+            (click)="verificarResposta(opcao)"
+          >
+            {{ opcao }}
+          </button>
+        }
+      </div>
+
+      @if (jaRespondeu) {
+        <div class="feedback-section" [class.success]="acertou" [class.error]="!acertou">
+          <h3>
+            {{ acertou ? '🎉 Excelente!' : '😢 Quase! Era na ' + respostaCorretaAtual }}
+          </h3>
+          <button class="btn-next" (click)="gerarRodada()">
+            {{ rodadaAtual === totalRodadas ? 'Ver Resultado Final' : 'Próximo País' }} <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  @if (jogoFinalizado) {
+    <div class="end-screen">
+      <h2>Fim do Jogo! 🏁</h2>
+      
+      <div class="score-display">
+        <span class="score-number">{{ pontuacao }}</span>
+        <span class="score-total">/ {{ totalRodadas }}</span>
+      </div>
+
+      <p class="score-message">
+        @if (pontuacao === 10) {
+          Perfeito! Você conhece o mapa como ninguém! 🗺️
+        } @else if (pontuacao >= 7) {
+          Excelente trabalho! Você uma ótima noção geográfica. 🌍
+        } @else if (pontuacao >= 4) {
+          Bom esforço! Mais algumas rodadas e voce fica expert. 👍
+        } @else {
+          Tenta novamente! O importante é aprender a brincar. 💪
+        }
+      </p>
+
+      <div class="action-buttons">
+        <button class="btn-start btn-continente" (click)="iniciarJogo()">
+          <i class="fa-solid fa-rotate-right"></i> Jogar Novamente
+        </button>
+        
+        <a routerLink="/" class="btn-start btn-exit">
+          <i class="fa-solid fa-house"></i> Sair
+        </a>
+      </div>
+    </div>
+  }
+</div>

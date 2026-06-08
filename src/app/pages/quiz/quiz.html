@@ -1,4 +1,9 @@
 <div class="quiz-container">
+  <div class="quiz-header">
+    <a routerLink="/" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Voltar
+    </a>
+  </div>
   
   @if (carregando) {
     <div class="loading-state">
@@ -16,21 +21,18 @@
 
   @if (jogoIniciado && !jogoFinalizado) {
     <div class="game-board">
-      
-      <div class="progress-badge">
-        Rodada {{ rodadaAtual }} de {{ totalRodadas }}
-      </div>
+      <div class="progress-badge">Rodada {{ rodadaAtual }} de {{ totalRodadas }}</div>
 
       <h2 class="question-title">A que país pertence esta bandeira?</h2>
-      
+
       <div class="flag-wrapper">
-        <img [src]="bandeiraUrl" alt="Bandeira Misteriosa" class="mystery-flag">
+        <img [src]="bandeiraUrl" alt="Bandeira Misteriosa" class="mystery-flag" />
       </div>
 
       <div class="options-grid">
         @for (opcao of opcoes; track opcao) {
-          <button 
-            class="btn-option" 
+          <button
+            class="btn-option"
             [class.correct]="jaRespondeu && opcao === nomeCorretoAtual"
             [class.wrong]="jaRespondeu && opcao !== nomeCorretoAtual"
             [disabled]="jaRespondeu"
@@ -47,7 +49,8 @@
             {{ acertou ? '🎉 Excelente!' : '😢 Quase! Era ' + nomeCorretoAtual }}
           </h3>
           <button class="btn-next" (click)="gerarRodada()">
-            {{ rodadaAtual === totalRodadas ? 'Ver Resultado Final' : 'Próxima Bandeira' }} <i class="fa-solid fa-arrow-right"></i>
+            {{ rodadaAtual === totalRodadas ? 'Ver Resultado Final' : 'Próxima Bandeira' }}
+            <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       }
@@ -57,7 +60,7 @@
   @if (jogoFinalizado) {
     <div class="end-screen">
       <h2>Fim do Jogo! 🏁</h2>
-      
+
       <div class="score-display">
         <span class="score-number">{{ pontuacao }}</span>
         <span class="score-total">/ {{ totalRodadas }}</span>
@@ -75,8 +78,13 @@
         }
       </p>
 
-      <button class="btn-start" (click)="iniciarJogo()"><i class="fa-solid fa-rotate-right"></i> Jogar Novamente</button>
+      <div class="action-buttons">
+        <button class="btn-start" (click)="iniciarJogo()">
+          <i class="fa-solid fa-rotate-right"></i> Jogar Novamente
+        </button>
+
+        <a routerLink="/" class="btn-start btn-exit"> <i class="fa-solid fa-house"></i> Sair </a>
+      </div>
     </div>
   }
-
 </div>
