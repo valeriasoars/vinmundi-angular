@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Navbar } from "../../components/navbar/navbar";
 import { ContinentBar } from "../../components/continent-bar/continent-bar";
 import { CountryCard } from "../../components/country-card/country-card";
 import { CountryList } from "../country-list/country-list";
+import { Auth } from '../../service/auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +13,11 @@ import { CountryList } from "../country-list/country-list";
   styleUrl: './home.css',
 })
 export class Home {
+private readonly authService = inject(Auth);
+private readonly router = inject(Router);
 
+  async sair(){
+  await this.authService.fazerLogout();
+  this.router.navigate(['/login']);
+}
 }

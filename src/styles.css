@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
+    /* Cores Principais */
     --primary-color: #0D1F3C;
     --secondary-color: #2563EB;
 
+    /* Escala de Cinza e Fundo */
     --white: #FFFFFF;
     --gray-100: #F8FAFC;
     --gray-200: #E2E8F0;
     --gray-500: #64748B;
-    --gray-900: #0F172A;
+    --gray-900: #1e293b; /* Usado também para as bordas e sombras do brutalismo */
 
+    /* Cores de Feedback */
     --success: #22C55E;
     --warning: #F59E0B;
     --danger: #EF4444;
 
+    /* Fontes */
     --font-default: 'Poppins', sans-serif;
 
     /* Espaçamentos */
@@ -23,16 +27,21 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
 
-    /* Bordas */
+    /* Arredondamento */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
 
-    /* Sombra */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    /* === ESTILO NEO-BRUTALISMO GLOBAL === */
+    --border-brutal: 3px solid var(--gray-900);
+    
+    /* Sombras base */
+    --shadow-brutal-sm: 4px 4px 0px var(--gray-900);
+    --shadow-brutal-md: 6px 6px 0px var(--gray-900);
+    --shadow-brutal-lg: 8px 8px 0px var(--gray-900);
 }
 
+/* === RESETS GERAIS === */
 * {
     margin: 0;
     padding: 0;
@@ -71,4 +80,48 @@ select {
 img {
     max-width: 100%;
     display: block;
+}
+
+/* === CLASSES GLOBAIS UTILITÁRIAS === */
+
+.card-brutal {
+    background-color: var(--white);
+    border: var(--border-brutal);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-brutal-md);
+    transition: all 0.2s ease;
+}
+
+.btn-brutal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border: var(--border-brutal);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-brutal-sm);
+    transition: all 0.1s ease;
+    background-color: var(--white);
+    color: var(--gray-900);
+}
+
+
+.btn-brutal:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--gray-900);
+}
+
+
+.btn-brutal.primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+
+.btn-brutal.success {
+    background-color: var(--success);
+    color: var(--white);
 }
