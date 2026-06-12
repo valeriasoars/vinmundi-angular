@@ -1,138 +1,212 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 1rem 2rem;
-    background-color: var(--primary-color);
-}
-
-.logo img {
-    height: 50px;
-    width: auto;
-}
-
-.btn-brasil-nav {
-  background-color: #22c55e !important; 
-}
-
-.btn-brasil-nav:hover {
-  background-color: #16a34a !important;
-}
-
-.navbar-actions {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between; 
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  
+  background-color: var(--white);
+  border-bottom: var(--border-brutal);
 }
 
-.btn-quiz {
+.logo-area {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  background-color: var(--secondary-color, #10b981); 
-  color: var(--white, #ffffff);
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 99px; 
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-   cursor: pointer;
+  cursor: pointer;
 }
 
-.btn-quiz:hover {
-  transform: translateY(-2px);
-  background-color: white; 
-  color: black ;
+.navbar-logo {
+  height: 60px; 
+  width: auto;
+}
+
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg); 
+  flex-wrap: wrap; 
 }
 
 .search-box {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-
-    width: 350px;
-    max-width: 100%;
-
-    padding: 0.8rem 1rem;
-
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-
-    backdrop-filter: blur(8px);
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .search-icon {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  left: 12px;
+  color: var(--gray-500);
+  font-size: 0.9rem;
 }
 
-.search-box input {
-    flex: 1;
-
-    border: none;
-    outline: none;
-    background: transparent;
-
-    color: var(--white);
-    font-size: 0.95rem;
+.search-input {
+  width: 200px; 
+  padding: 0.5rem 1rem 0.5rem 2.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  
+  border: 3px solid var(--gray-900);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--gray-900);
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-.search-box input::placeholder {
-    color: rgba(255, 255, 255, 0.55);
+.search-input:focus {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--gray-900);
 }
 
-.search-box:focus-within {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.12);
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
-/* Tablet */
+.xp-badge {
+  display: flex;
+  gap: 0.4rem;
+  background-color: var(--warning);
+  padding: 0.5rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gray-900);
+  
+  border: 3px solid var(--gray-900);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--gray-900);
+}
+
+.btn-exit {
+  background-color: var(--gray-200);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  
+  background-color: var(--white);
+  border-bottom: var(--border-brutal);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-logo {
+  height: 60px; 
+  width: auto;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg); 
+  flex-wrap: wrap; 
+}
+
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--gray-500);
+  font-size: 0.9rem;
+}
+
+.search-input {
+  width: 200px; 
+  padding: 0.5rem 1rem 0.5rem 2.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  
+  border: 3px solid var(--gray-900);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--gray-900); 
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--gray-900);
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.xp-badge {
+  display: flex;
+  gap: 0.4rem;
+  background-color: var(--warning);
+  padding: 0.5rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gray-900);
+  
+  border: 3px solid var(--gray-900);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--gray-900);
+}
+
+.btn-exit {
+  background-color: var(--gray-200);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+
+
+/* =========================================
+   RESPONSIVIDADE 
+   ========================================= */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 1rem;
-    }
+  .navbar {
+    flex-direction: column; 
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
 
-    .search-box {
-        width: 280px;
-    }
-}
+  .logo-area {
+    width: 100%;
+    justify-content: center; 
+  }
 
-/* Mobile */
-@media (max-width: 576px) {
-    .navbar {
-        flex-direction: row;
-        flex-wrap: wrap; 
-        justify-content: space-between;
-    }
+  .right-side {
+    width: 100%;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
 
-    .navbar-actions {
-        /* Desfaz o agrupamento no celular para organizar os itens individualmente */
-        display: contents; 
-    }
+  .user-actions {
+    width: 100%;
+    justify-content: space-between; 
+  }
 
-    .logo {
-        order: 1;
-    }
+  .search-box {
+    width: 100%;
+    order: 3; 
+  }
 
-    .btn-quiz {
-        order: 2; /* Fica na linha de cima, na direita */
-        padding: 0.6rem 0.8rem;
-    }
-
-    .btn-quiz span { 
-        display: none;
-    }
-
-    .search-box {
-        order: 3; /* Empurra para a linha de baixo */
-        width: 100%;
-        margin-top: 0.8rem;
-    }
-
-    .logo img {
-        height: 45px;
-    }
+  .search-input {
+    width: 100%; 
+  }
 }

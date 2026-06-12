@@ -1,7 +1,8 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Country } from '../../service/country/country';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../../service/auth/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,8 @@ import { RouterLink } from '@angular/router';
 })
 export class Navbar implements OnInit, OnDestroy {
   private readonly countryService = inject(Country);
+  private readonly authService = inject(Auth); 
+  private readonly router = inject(Router);
   
   private searchSubject = new Subject<string>();
   private sub!: Subscription;
@@ -27,6 +30,11 @@ export class Navbar implements OnInit, OnDestroy {
   onSearch(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchSubject.next(input.value); 
+  }
+
+  async sair() {
+    await this.authService.fazerLogout();
+    this.router.navigate(['/login']); 
   }
 
   ngOnDestroy() {
