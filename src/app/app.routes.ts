@@ -5,12 +5,18 @@ import { CountryDetail } from './pages/country-detail/country-detail';
 import { Quiz } from './pages/quiz/quiz';
 import { QuizContinent } from './pages/quiz-continent/quiz-continent';
 import { GeografiaBrasil } from './pages/geografia-brasil/geografia-brasil';
+import { Login } from './pages/login/login';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'country/:code', component: CountryDetail },
-  { path: 'quiz', component: Quiz },
-  { path: 'continente', component: QuizContinent },
-  { path: 'geografia-brasil', component: GeografiaBrasil },
+
+  { path: 'login', component: Login },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  { path: 'home', component: Home, canActivate: [authGuard] },
+  { path: 'country/:code', component: CountryDetail,canActivate: [authGuard] },
+  { path: 'quiz', component: Quiz, canActivate: [authGuard] },
+  { path: 'continente', component: QuizContinent,canActivate: [authGuard] },
+  { path: 'geografia-brasil', component: GeografiaBrasil, canActivate: [authGuard] },
 
 ];
