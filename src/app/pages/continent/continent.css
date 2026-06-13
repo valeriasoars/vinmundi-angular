@@ -212,6 +212,127 @@
   font-size: 1.2rem;
 }
 
+
+/* =========================================
+   SISTEMA DE NÍVEIS (Desafios)
+========================================= */
+.challenge-header p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--gray-900, #111);
+}
+
+.levels-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--gray-900, #111);
+  background-color: var(--white, #fff);
+  gap: 1.5rem; 
+  min-height: 180px; 
+  width: 100%;
+}
+
+.level-card.open {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s;
+}
+
+.level-card.open:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--gray-900, #111);
+  background-color: #f0fdf4;
+}
+
+.level-card.open:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--gray-900, #111);
+}
+
+
+.level-card.locked {
+  background-color: #e5e5e5;
+  color: #666;
+  border-color: #666;
+  box-shadow: 4px 4px 0px #666;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%; 
+}
+
+.level-info h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.level-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.level-tag {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background-color: var(--gray-900, #111);
+  color: var(--white, #fff);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.locked-tag {
+  background-color: #666;
+}
+
+.level-action {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  width: 100%;
+  gap: 0.8rem;
+  margin-top: auto; 
+}
+.score-badge {
+  font-size: 0.85rem;
+  font-weight: 800;
+  background-color: #fef08a; 
+  padding: 0.3rem 0.6rem;
+  border: 2px solid var(--gray-900, #111);
+  border-radius: 4px;
+}
+
+.btn-play {
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: underline;
+  color: var(--success, #22c55e);
+  transition: color 0.2s;
+}
+
+.level-card.open:hover .btn-play {
+  color: var(--gray-900, #111);
+}
+
 /* =========================================
    RESPONSIVIDADE (CELULARES E TABLETS)
 ========================================= */

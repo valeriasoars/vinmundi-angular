@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { MapaBrasil } from "../../components/mapa-brasil/mapa-brasil";
+import { MapaBrasil } from '../../../components/mapa-brasil/mapa-brasil';
+
 
 @Component({
   selector: 'app-region-brazil-quiz',

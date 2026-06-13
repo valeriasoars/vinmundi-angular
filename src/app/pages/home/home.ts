@@ -1,14 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Navbar } from "../../components/navbar/navbar";
 import { ContinentBar } from "../../components/continent-bar/continent-bar";
-import { CountryCard } from "../../components/country-card/country-card";
-import { CountryList } from "../country-list/country-list";
 import { Auth } from '../../service/auth/auth';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, ContinentBar, CountryCard, CountryList],
+  imports: [Navbar, ContinentBar],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

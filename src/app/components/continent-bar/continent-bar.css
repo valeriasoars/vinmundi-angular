@@ -121,3 +121,16 @@
   border-radius: 8px;
   box-shadow: 6px 6px 0px var(--gray-900, #111111);
 }
+
+.progress-fill {
+  height: 100%;
+  background-color: #22c55e; 
+  border-right: 3px solid var(--gray-900, #111);
+  
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1); 
+}
+
+
+.progress-fill[style*="width: 0%"] {
+  border-right: none;
+}

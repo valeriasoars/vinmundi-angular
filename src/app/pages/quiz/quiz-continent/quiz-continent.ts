@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { Country } from '../../service/country/country';
-import { CountryModel } from '../../models/country-model';
+import { Country } from '../../../service/country/country';
+import { CountryModel } from '../../../models/country-model';
 import { RouterLink } from '@angular/router';
 
 @Component({

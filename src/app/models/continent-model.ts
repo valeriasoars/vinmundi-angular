@@ -3,4 +3,5 @@ export interface ContinentModel {
   name: string; 
   countriesCount: number;
   completedCount?: number;
+  vistoDesbloqueado?: boolean;
 }

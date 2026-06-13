@@ -1,36 +1,40 @@
 <section class="continents-grid">
   @for (continent of continents; track continent.name) {
-    
-    <button 
-      class="card-brutal continent-card" 
-      [class.active]="continenteAtivo === continent.id" 
+
+    <button
+      class="card-brutal continent-card"
+      [class.active]="continenteAtivo === continent.id"
+      [class.visto-ok]="continent.vistoDesbloqueado"
       [routerLink]="['/continente', continent.id]"
-      >
-      
+    >
       <div class="card-header">
         <h3>{{ continent.name }}</h3>
         <span class="progress-text">
-          {{ continent.completedCount || 0 }}/{{ continent.countriesCount }}
+          @if (continent.vistoDesbloqueado) {
+            ✅ Visto
+          } @else {
+            {{ continent.completedCount }}/3 desafios
+          }
         </span>
       </div>
 
       <div class="progress-container">
-        <div 
-          class="progress-fill" 
-          [style.width.%]="calcularProgresso(continent.completedCount, continent.countriesCount)">
+        <div
+          class="progress-fill"
+          [style.width.%]="calcularProgresso(continent.completedCount)">
         </div>
       </div>
 
-      <p class="subtitle">Desbloquear Visto</p>
-      
+      <p class="subtitle">
+        {{ continent.vistoDesbloqueado ? '🛂 Visto Conquistado!' : 'Desbloquear Visto' }}
+      </p>
+
     </button>
-    
-  }@empty {
-    
+
+  } @empty {
     <div class="card-brutal" style="width: 100%; text-align: center; padding: 2rem;">
       <h3>⏳ Buscando dados do mundo...</h3>
       <p>Se isso não sumir, a API de países não está respondendo.</p>
     </div>
-    
   }
 </section>
