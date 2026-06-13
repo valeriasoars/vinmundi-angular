@@ -59,65 +59,61 @@ private readonly countryService = inject(Country);
     this.gerarRodada();
   }
 
-  obterRegiaoExata(pais: any): string {
-    const subregiao = pais?.subregion || '';
-    const regiao = pais?.region || '';
+  obterRegiaoExata(pais: CountryModel): string {
+  const subregiao = pais?.['subregion'] || '';
+  const regiao = pais?.['region'] || '';
 
-    if (subregiao === 'South America') return 'América do Sul';
-    if (subregiao === 'North America') return 'América do Norte';
-    if (subregiao === 'Central America') return 'América Central';
-    if (subregiao === 'Caribbean') return 'Caribe';
+  if (subregiao === 'South America') return 'América do Sul';
+  if (subregiao === 'North America') return 'América do Norte';
+  if (subregiao === 'Central America') return 'América Central';
+  if (subregiao === 'Caribbean') return 'Caribe';
 
-    const mapaRegioes: { [key: string]: string } = {
-      'Africa': 'África',
-      'Asia': 'Ásia',
-      'Europe': 'Europa',
-      'Oceania': 'Oceania',
-      'Antarctic': 'Antártida'
-    };
+  const mapaRegioes: { [key: string]: string } = {
+    'Africa': 'África',
+    'Asia': 'Ásia',
+    'Europe': 'Europa',
+    'Oceania': 'Oceania',
+    'Antarctic': 'Antártida'
+  };
 
-    return mapaRegioes[regiao] || regiao || 'Desconhecido';
-  }
+  return mapaRegioes[regiao] || regiao || 'Desconhecido';
+}
 
   gerarRodada() {
-    if (this.rodadaAtual >= this.totalRodadas) {
-      this.jogoFinalizado = true;
-      this.cdr.detectChanges();
-      return;
-    }
-
-    this.rodadaAtual++;
-    this.jaRespondeu = false;
-    this.acertou = false;
-
-    const indexCorreto = Math.floor(Math.random() * this.todosPaises.length);
-    this.paisCorreto = this.todosPaises[indexCorreto];
-
-    this.nomePaisAtual = this.paisCorreto?.translations?.por?.common || 
-                         this.paisCorreto?.name?.common || 
-                         (typeof this.paisCorreto?.name === 'string' ? this.paisCorreto.name : '') || 
-                         'País Desconhecido';
-
-    this.bandeiraUrl = this.paisCorreto?.flags?.svg || 
-                       this.paisCorreto?.flags?.png || 
-                       (typeof this.paisCorreto?.flags === 'string' ? this.paisCorreto.flags : '');
-    this.respostaCorretaAtual = this.obterRegiaoExata(this.paisCorreto);
-    
-    let novasOpcoes = [this.respostaCorretaAtual];
-
-    while (novasOpcoes.length < 4) {
-      const indexAleatorio = Math.floor(Math.random() * this.listaContinentes.length);
-      const continenteAleatorio = this.listaContinentes[indexAleatorio];
-
-      if (!novasOpcoes.includes(continenteAleatorio)) {
-        novasOpcoes.push(continenteAleatorio);
-      }
-    }
-    
-    this.opcoes = this.embaralharArray(novasOpcoes);
+  if (this.rodadaAtual >= this.totalRodadas) {
+    this.jogoFinalizado = true;
     this.cdr.detectChanges();
+    return;
   }
 
+  this.rodadaAtual++;
+  this.jaRespondeu = false;
+  this.acertou = false;
+
+  const indexCorreto = Math.floor(Math.random() * this.todosPaises.length);
+  this.paisCorreto = this.todosPaises[indexCorreto];
+
+  // // v5: notação de colchete
+  // this.nomePaisAtual = this.paisCorreto?.['names.common'] || 'País Desconhecido';
+
+  // this.bandeiraUrl = this.paisCorreto?.['flag.url_svg'] || 
+  //                    this.paisCorreto?.['flag.url_png'] || '';
+
+  // this.respostaCorretaAtual = this.obterRegiaoExata(this.paisCorreto);
+
+  let novasOpcoes = [this.respostaCorretaAtual];
+
+  while (novasOpcoes.length < 4) {
+    const indexAleatorio = Math.floor(Math.random() * this.listaContinentes.length);
+    const continenteAleatorio = this.listaContinentes[indexAleatorio];
+    if (!novasOpcoes.includes(continenteAleatorio)) {
+      novasOpcoes.push(continenteAleatorio);
+    }
+  }
+
+  this.opcoes = this.embaralharArray(novasOpcoes);
+  this.cdr.detectChanges();
+}
   embaralharArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

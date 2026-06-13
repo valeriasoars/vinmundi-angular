@@ -1,22 +1,34 @@
 export interface CountryModel {
-  name: {
+  names: {
     common: string;
+    official: string;
+    translations?: {
+      por?: { common: string; official: string };
+    };
   };
 
-  flags: {
-    png: string;
-    svg: string;
+  codes: {
+    alpha_2: string;
+    alpha_3: string;
   };
 
-  region: string;
+  flag: {
+    url_svg?: string;
+    url_png?: string;
+    emoji?: string;
+  };
 
-  population: number;
+  classification?: {
+    dependency?: boolean;
+    sovereign?: boolean;
+    iso_status?: string;
+  };
 
-  capital: string[];
+  region?: string;
+  subregion?: string;
+  borders?: string[];
 
-  cca3: string;
 
-  borders: string[];
-  
-  translations?: any;
+  population?: number;
+  capitals?: { name: string }[];
 }

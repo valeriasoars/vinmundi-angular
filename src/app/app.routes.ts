@@ -7,6 +7,7 @@ import { QuizContinent } from './pages/quiz-continent/quiz-continent';
 import { GeografiaBrasil } from './pages/geografia-brasil/geografia-brasil';
 import { Login } from './pages/login/login';
 import { authGuard } from './guards/auth-guard';
+import { Continent } from './pages/continent/continent';
 
 export const routes: Routes = [
 
@@ -16,7 +17,8 @@ export const routes: Routes = [
   { path: 'home', component: Home, canActivate: [authGuard] },
   { path: 'country/:code', component: CountryDetail,canActivate: [authGuard] },
   { path: 'quiz', component: Quiz, canActivate: [authGuard] },
-  { path: 'continente', component: QuizContinent,canActivate: [authGuard] },
+  { path: 'continente', component: QuizContinent, canActivate: [authGuard] },
   { path: 'geografia-brasil', component: GeografiaBrasil, canActivate: [authGuard] },
+  { path: 'continente/:regiao', component: Continent, canActivate: [authGuard]},
 
 ];

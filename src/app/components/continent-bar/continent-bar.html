@@ -1,13 +1,36 @@
-<section class="continents">
+<section class="continents-grid">
   @for (continent of continents; track continent.name) {
-    <button class="continent-card" [class.active]="continenteAtivo === continent.id" (click)="selecionarContinente(continent.id)">
-      <h3>{{ continent.name }}</h3>
-
-      <div class="continent-info">
-        <i class="fa-solid fa-location-dot"></i>
-
-        <span> {{ continent.countriesCount }} países </span>
+    
+    <button 
+      class="card-brutal continent-card" 
+      [class.active]="continenteAtivo === continent.id" 
+      [routerLink]="['/continente', continent.id]"
+      >
+      
+      <div class="card-header">
+        <h3>{{ continent.name }}</h3>
+        <span class="progress-text">
+          {{ continent.completedCount || 0 }}/{{ continent.countriesCount }}
+        </span>
       </div>
+
+      <div class="progress-container">
+        <div 
+          class="progress-fill" 
+          [style.width.%]="calcularProgresso(continent.completedCount, continent.countriesCount)">
+        </div>
+      </div>
+
+      <p class="subtitle">Desbloquear Visto</p>
+      
     </button>
+    
+  }@empty {
+    
+    <div class="card-brutal" style="width: 100%; text-align: center; padding: 2rem;">
+      <h3>⏳ Buscando dados do mundo...</h3>
+      <p>Se isso não sumir, a API de países não está respondendo.</p>
+    </div>
+    
   }
 </section>

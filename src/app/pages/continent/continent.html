@@ -1,0 +1,63 @@
+<div class="page-wrapper">
+  <!-- CABEÇALHO -->
+  <header class="continent-header card-brutal">
+    <div class="header-title">
+      <a routerLink="/home" class="btn-back">⬅ Voltar</a>
+      <h1>Missão: {{ nomeContinente }}</h1>
+    </div>
+
+    <div class="visa-status"><span class="status-icon">❌</span> Visto Pendente</div>
+  </header>
+
+  <!-- SE ESTIVER CARREGANDO -->
+  @if (carregando) {
+    <div class="loading-box card-brutal">
+      <h3>⏳ Preparando dossiê do continente...</h3>
+    </div>
+  } @else {
+    <main class="content-split">
+      <!-- ESQUERDA: DESAFIO -->
+      <section class="challenge-section card-brutal">
+        <h2>Obter Visto</h2>
+        <p>
+          Você precisa provar que conhece {{ nomeContinente }}. Acerte 100% do quiz para ganhar o
+          carimbo no seu Passaporte Virtual.
+        </p>
+
+        <button class="btn-brutal btn-huge" [routerLink]="['/quiz', regiaoId]">
+          🎮 Iniciar Desafio Oficial
+        </button>
+      </section>
+
+      <!-- DIREITA: ESTUDO -->
+      <section class="study-section">
+        <div class="study-header">
+          <h2>Sala de Estudo</h2>
+          <span class="badge-brutal">{{ paises.length }} países</span>
+        </div>
+        <p class="subtitle">Clique em um país para ver os detalhes antes do quiz.</p>
+
+        <div class="countries-grid">
+          @for (pais of paises; track $index) {
+            <a
+              class="country-mini-card card-brutal clickable-card"
+              [routerLink]="['/country', pais.codes?.alpha_3 || pais.names?.common]"
+            >
+              <img
+                [src]="
+                  pais.flag?.url_svg || pais.flag?.url_png || 'https://placehold.co/60x40?text=?'
+                "
+                alt="Bandeira"
+                class="mini-flag"
+              />
+
+              <span class="country-name">{{ pais.names?.common || 'Desconhecido' }}</span>
+            </a>
+          } @empty {
+            <p>Nenhum país encontrado na base de dados.</p>
+          }
+        </div>
+      </section>
+    </main>
+  }
+</div>

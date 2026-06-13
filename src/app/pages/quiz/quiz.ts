@@ -55,49 +55,47 @@ export class Quiz implements OnInit{
     this.gerarRodada();
   }
 
-  gerarRodada() {
-    if (this.rodadaAtual >= this.totalRodadas) {
-      this.jogoFinalizado = true;
-      this.cdr.detectChanges();
-      return;
-    }
-
-    this.rodadaAtual++;
-    this.jaRespondeu = false;
-    this.acertou = false;
-
-    const indexCorreto = Math.floor(Math.random() * this.todosPaises.length);
-    this.paisCorreto = this.todosPaises[indexCorreto];
-
-    this.nomeCorretoAtual = this.paisCorreto?.translations?.por?.common || 
-                            this.paisCorreto?.name?.common || 
-                            (typeof this.paisCorreto?.name === 'string' ? this.paisCorreto.name : '') || 
-                            'País Desconhecido';
-
-    this.bandeiraUrl = this.paisCorreto?.flags?.svg || 
-                       this.paisCorreto?.flags?.png || 
-                       (typeof this.paisCorreto?.flags === 'string' ? this.paisCorreto.flags : '');
-    console.log('País Sorteado:', this.paisCorreto);
-    console.log('Link da Bandeira:', this.bandeiraUrl);
-
-    let novasOpcoes = [this.nomeCorretoAtual];
-
-    while (novasOpcoes.length < 4) {
-      const indexAleatorio = Math.floor(Math.random() * this.todosPaises.length);
-      const paisAleatorio = this.todosPaises[indexAleatorio];
-      
-      const nomeAleatorio = paisAleatorio?.translations?.por?.common || 
-                            paisAleatorio?.name?.common || 
-                            (typeof paisAleatorio?.name === 'string' ? paisAleatorio.name : '');
-
-      if (nomeAleatorio && !novasOpcoes.includes(nomeAleatorio)) {
-        novasOpcoes.push(nomeAleatorio);
-      }
-    }
-
-    this.opcoes = this.embaralharArray(novasOpcoes);
+ gerarRodada() {
+  if (this.rodadaAtual >= this.totalRodadas) {
+    this.jogoFinalizado = true;
     this.cdr.detectChanges();
+    return;
   }
+
+  this.rodadaAtual++;
+  this.jaRespondeu = false;
+  this.acertou = false;
+
+  const indexCorreto = Math.floor(Math.random() * this.todosPaises.length);
+  this.paisCorreto = this.todosPaises[indexCorreto];
+
+  // // v5: campo é 'names.common' com notação de colchete
+  // this.nomeCorretoAtual = this.paisCorreto?.['names.common'] || 'País Desconhecido';
+
+  // // v5: bandeira é 'flag.url_svg' ou 'flag.url_png'
+  // this.bandeiraUrl = this.paisCorreto?.['flag.url_svg'] || 
+  //                    this.paisCorreto?.['flag.url_png'] || '';
+
+  console.log('País Sorteado:', this.paisCorreto);
+  console.log('Link da Bandeira:', this.bandeiraUrl);
+
+  let novasOpcoes = [this.nomeCorretoAtual];
+
+  while (novasOpcoes.length < 4) {
+    const indexAleatorio = Math.floor(Math.random() * this.todosPaises.length);
+    const paisAleatorio = this.todosPaises[indexAleatorio];
+
+    // mesmo padrão v5
+    // const nomeAleatorio = paisAleatorio?.['names.common'];
+
+    // if (nomeAleatorio && !novasOpcoes.includes(nomeAleatorio)) {
+    //   novasOpcoes.push(nomeAleatorio);
+    // }
+  }
+
+  this.opcoes = this.embaralharArray(novasOpcoes);
+  this.cdr.detectChanges();
+}
 
   embaralharArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {

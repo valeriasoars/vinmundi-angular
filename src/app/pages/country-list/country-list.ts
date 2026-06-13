@@ -45,7 +45,7 @@ ngOnInit() {
   private atualizarLista(dados: CountryModel[]) {
     this.countries = dados.map(pais => ({
       ...pais,
-      capital: pais.capital || [],
+      capital: pais.capitals || [],
       borders: pais.borders || [] 
     }));
     this.cdr.detectChanges();

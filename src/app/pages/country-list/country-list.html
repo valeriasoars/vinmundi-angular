@@ -1,4 +1,4 @@
-@if (countries.length === 0) {
+<!-- @if (countries.length === 0) {
 
 <section class="empty-state">
     <img
@@ -23,4 +23,14 @@
 
 </section>
 
-}
+} -->
+
+<section class="countries-grid">
+
+    @for (country of countries; track $index) {
+        <app-country-card
+            [country]="country">
+        </app-country-card>
+    }
+
+</section>

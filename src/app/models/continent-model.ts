@@ -1,5 +1,6 @@
 export interface ContinentModel {
   id: string; 
   name: string; 
-  countriesCount: number
+  countriesCount: number;
+  completedCount?: number;
 }

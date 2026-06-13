@@ -1,13 +1,13 @@
-<div class="country-card" [routerLink]="['/country', country.cca3]">
+<div class="country-card" [routerLink]="['/country', country.codes.alpha_3]">
 
     <img
-        [src]="country.flags.svg"
-        [alt]="country.name.common"
+        [src]="country.flag.url_svg"
+        [alt]="country.names.common"
         class="country-flag">
 
     <div class="country-content">
 
-        <h3>{{ country.name.common }}</h3>
+        <h3>{{ country.names.common }}</h3>
 
         <p>
             <strong>População:</strong>
@@ -16,7 +16,7 @@
 
         <p>
             <strong>Capital:</strong>
-            {{ country.capital[0] || 'N/A' }}
+            {{ country.capitals?.[0]?.name || 'N/A' }}
         </p>
 
         <p>
