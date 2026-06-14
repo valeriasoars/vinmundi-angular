@@ -9,6 +9,8 @@ import { Login } from './pages/login/login';
 import { authGuard } from './guards/auth-guard';
 import { Continent } from './pages/continent/continent';
 import { QuizBandeiras } from './pages/quiz/quiz-bandeiras/quiz-bandeiras';
+import { QuizSilhuetas } from './pages/quiz/quiz-silhuetas/quiz-silhuetas/quiz-silhuetas';
+import { QuizCapitais } from './pages/quiz/quiz-capitais/quiz-capitais/quiz-capitais';
 
 export const routes: Routes = [
 
@@ -19,7 +21,12 @@ export const routes: Routes = [
   { path: 'country/:code', component: CountryDetail,canActivate: [authGuard] },
   { path: 'continente', component: QuizContinent, canActivate: [authGuard] },
   { path: 'geografia-brasil', component: GeografiaBrasil, canActivate: [authGuard] },
+
   { path: 'continente/:regiao', component: Continent, canActivate: [authGuard]},
-  { path: 'quiz/:regiao/:tipo', component: QuizBandeiras, canActivate: [authGuard] },
+  /*{ path: 'quiz/:regiao/:tipo', component: QuizBandeiras, canActivate: [authGuard] },*/
+
+  { path: 'quiz/:regiao/bandeiras', component: QuizBandeiras, canActivate: [authGuard] },
+  { path: 'quiz/:regiao/capitais', component: QuizCapitais, canActivate: [authGuard] },
+  { path: 'quiz/:regiao/silhuetas', component: QuizSilhuetas, canActivate: [authGuard] },
 
 ];

@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { RegionBrazilQuiz } from "../region-brazil-quiz/region-brazil-quiz";
+
 
 @Component({
   selector: 'app-geografia-brasil',
-  imports: [RouterLink, RegionBrazilQuiz],
+  imports: [RouterLink],
   templateUrl: './geografia-brasil.html',
   styleUrl: './geografia-brasil.css',
 })

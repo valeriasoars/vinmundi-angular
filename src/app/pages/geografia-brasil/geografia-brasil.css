@@ -1,4 +1,4 @@
-@import '../quiz/quiz.css'; /* Reaproveita os estilos dos cards dos outros jogos */
+/* Reaproveita os estilos dos cards dos outros jogos */
 
 .hub-container {
   max-width: 900px;

@@ -1,0 +1,76 @@
+<div class="page-wrapper">
+
+  <header class="card-brutal quiz-header">
+    <a [routerLink]="['/continente', regiaoId]" class="btn-back">⬅ Voltar</a>
+    <h1>🏛️ Quiz de Capitais</h1>
+    @if (jogoIniciado && !jogoFinalizado) {
+      <span class="score-badge">{{ pontuacao }}/{{ rodadaAtual - 1 }} • Rodada {{ rodadaAtual }}/{{ totalRodadas }}</span>
+    }
+  </header>
+
+  @if (carregando) {
+    <div class="card-brutal loading-box">⏳ A procurar registos governamentais...</div>
+
+  } @else if (!jogoIniciado) {
+    <div class="card-brutal start-box">
+      <h2>Nível 2: Geografia Política</h2>
+      <p>Prove que domina as sedes de poder. Identifique a capital correta de <strong>{{ totalRodadas }} países</strong>. O passe de aprovação requer <strong>{{ MINIMO_APROVACAO }}</strong> acertos.</p>
+      <button class="btn-brutal btn-huge" (click)="iniciarJogo()">▶ Iniciar Teste</button>
+    </div>
+
+  } @else if (jogoFinalizado) {
+    <div class="card-brutal result-box">
+      <h2>{{ aprovado ? '🎉 Autorização Concedida!' : '😬 Acesso Negado...' }}</h2>
+      <p class="score-final">{{ pontuacao }}/{{ totalRodadas }}</p>
+      
+      <div class="xp-rewards">
+        <span class="xp-badge">+{{ xpGanhoNaRodada }} XP</span>
+        @if (subiuDeNivel) {
+          <span class="level-up-badge">⭐ SUBIU DE NÍVEL!</span>
+        }
+      </div>
+
+      <p>{{ aprovado ? 'Conhecimento político validado! O último desafio aguarda-o.' : 'Precisa de ' + MINIMO_APROVACAO + ' acertos para prosseguir.' }}</p>
+
+      <div class="result-actions">
+        <button class="btn-brutal" (click)="iniciarJogo()">🔁 Tentar Novamente</button>
+        @if (aprovado) {
+          <a class="btn-brutal btn-primary" [routerLink]="['/quiz', regiaoId, 'silhuetas']">
+            Missão Final: Cartografia ➡
+          </a>
+        }
+      </div>
+    </div>
+
+  } @else {
+    <div class="quiz-arena card-brutal">
+      <h2>Qual é a capital deste país?</h2>
+      
+      <div class="country-display card-brutal" style="width: 100%; max-width: 400px; padding: 3rem 1rem; text-align: center; background-color: #fef08a; font-size: 2rem; font-weight: 900;">
+        {{ paisPergunta }}
+      </div>
+
+      <div class="options-grid" style="margin-top: 1rem;">
+        @for (opcao of opcoes; track opcao) {
+          <button
+            class="btn-brutal option-btn"
+            [class.correct]="jaRespondeu && opcao === nomeCorreto"
+            [class.wrong]="jaRespondeu && opcao !== nomeCorreto && acertou === false"
+            [disabled]="jaRespondeu"
+            (click)="verificarResposta(opcao)"
+          >
+            {{ opcao }}
+          </button>
+        }
+      </div>
+
+      @if (jaRespondeu) {
+        <div class="feedback" [class.feedback-ok]="acertou" [class.feedback-err]="!acertou">
+          {{ acertou ? '✅ Exato!' : '❌ Era ' + nomeCorreto }}
+        </div>
+        <button class="btn-brutal" (click)="gerarRodada()">Próxima ➡</button>
+      }
+    </div>
+  }
+
+</div>

@@ -1,0 +1,273 @@
+.page-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white, #ffffff);
+  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 6px 6px 0px var(--gray-900, #111111);
+  border-radius: 8px;
+}
+.quiz-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.start-box,
+.result-box,
+.loading-box {
+  background-color: var(--white, #ffffff);
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 8px 8px 0px var(--gray-900, #111111);
+  border-radius: 12px;
+}
+.start-box h2,
+.result-box h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0;
+}
+.start-box p,
+.result-box p {
+  font-size: 1.1rem;
+  max-width: 500px;
+  line-height: 1.6;
+  margin: 0;
+}
+.score-final {
+  font-size: 4rem;
+  font-weight: 900;
+  background-color: #fef08a;
+  padding: 0.5rem 2rem;
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 4px 4px 0px var(--gray-900, #111111);
+  border-radius: 8px;
+  margin: 0.5rem 0;
+}
+.quiz-arena {
+  background-color: var(--white, #ffffff);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 8px 8px 0px var(--gray-900, #111111);
+  border-radius: 12px;
+}
+.quiz-arena h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+/* ESTILO ESPECÍFICO DA SILHUETA */
+.silhouette-display {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  /* O filtro brightness(0) força qualquer imagem (mesmo colorida) a ficar 100% preta */
+  filter: brightness(0) drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.2));
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 600px;
+}
+.option-btn {
+  padding: 1.2rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background-color: var(--white, #ffffff);
+  text-align: center;
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 4px 4px 0px var(--gray-900, #111111);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s,
+    background-color 0.2s;
+}
+.option-btn:hover:not([disabled]) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--gray-900, #111111);
+  background-color: #f3f4f6;
+}
+.option-btn:active:not([disabled]) {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--gray-900, #111111);
+}
+.option-btn.correct {
+  background-color: #bbf7d0 !important;
+  color: var(--gray-900, #111111) !important;
+  border-color: var(--gray-900, #111111) !important;
+  opacity: 1 !important;
+}
+.option-btn.wrong {
+  background-color: #fecaca !important;
+  color: #991b1b !important;
+  border-color: var(--gray-900, #111111) !important;
+  opacity: 0.8;
+}
+.option-btn[disabled]:not(.correct):not(.wrong) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: 2px 2px 0px var(--gray-900, #111111);
+}
+.feedback {
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+  border: 3px solid var(--gray-900, #111111);
+  border-radius: 8px;
+  box-shadow: 4px 4px 0px var(--gray-900, #111111);
+}
+.feedback-ok {
+  background-color: #22c55e;
+  color: var(--white, #ffffff);
+}
+.feedback-err {
+  background-color: #ef4444;
+  color: var(--white, #ffffff);
+}
+.btn-brutal {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  background-color: var(--white, #ffffff);
+  color: var(--gray-900, #111111);
+  border: 3px solid var(--gray-900, #111111);
+  box-shadow: 4px 4px 0px var(--gray-900, #111111);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.1s ease;
+}
+.btn-brutal:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--gray-900, #111111);
+}
+.btn-brutal:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--gray-900, #111111);
+}
+.btn-primary {
+  background-color: var(--success, #22c55e) !important;
+  color: var(--gray-900, #111111) !important;
+}
+.btn-huge {
+  width: 100%;
+  max-width: 300px;
+  padding: 1.2rem;
+  font-size: 1.3rem;
+}
+.result-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.score-badge {
+  font-size: 0.95rem;
+  font-weight: 800;
+  background-color: var(--gray-900, #111111);
+  color: var(--white, #ffffff);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+.btn-back {
+  font-weight: 800;
+  color: var(--gray-900, #111111);
+  text-decoration: none;
+  font-size: 1rem;
+}
+.btn-back:hover {
+  text-decoration: underline;
+}
+.xp-rewards {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.xp-badge {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 3px solid var(--gray-900, #111);
+  box-shadow: 4px 4px 0px var(--gray-900, #111);
+  border-radius: 8px;
+}
+.level-up-badge {
+  background-color: #a855f7;
+  color: white;
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 3px solid var(--gray-900, #111);
+  box-shadow: 4px 4px 0px var(--gray-900, #111);
+  border-radius: 8px;
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@media (max-width: 600px) {
+  .page-wrapper {
+    padding: 1rem;
+  }
+  .quiz-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+  }
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  .result-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .result-actions .btn-brutal {
+    width: 100%;
+  }
+}

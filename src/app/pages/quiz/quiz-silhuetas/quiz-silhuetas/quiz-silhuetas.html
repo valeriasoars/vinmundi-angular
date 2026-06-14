@@ -1,0 +1,82 @@
+<div class="page-wrapper">
+  <header class="card-brutal quiz-header">
+    <a [routerLink]="['/continente', regiaoId]" class="btn-back">⬅ Voltar</a>
+    <h1>🗺️ Cartografia (Silhuetas)</h1>
+    @if (jogoIniciado && !jogoFinalizado) {
+      <span class="score-badge"
+        >{{ pontuacao }}/{{ rodadaAtual - 1 }} • Rodada {{ rodadaAtual }}/{{ totalRodadas }}</span
+      >
+    }
+  </header>
+
+  @if (carregando) {
+    <div class="card-brutal loading-box">⏳ Carregando mapas cegos...</div>
+  } @else if (!jogoIniciado) {
+    <div class="card-brutal start-box">
+      <h2>Missão Final: Fronteiras</h2>
+      <p>
+        Reconheça <strong>{{ totalRodadas }} países</strong> apenas pelo formato do seu território.
+        Precisa de <strong>{{ MINIMO_APROVACAO }}</strong> acertos para o Visto Definitivo!
+      </p>
+      <button class="btn-brutal btn-huge" (click)="iniciarJogo()">▶ Iniciar Cartografia</button>
+    </div>
+  } @else if (jogoFinalizado) {
+    <div class="card-brutal result-box">
+      <h2>{{ aprovado ? '🏆 VISTO APROVADO!' : '😬 Quase lá...' }}</h2>
+      <p class="score-final">{{ pontuacao }}/{{ totalRodadas }}</p>
+
+      <div class="xp-rewards">
+        <span class="xp-badge">+{{ xpGanhoNaRodada }} XP</span>
+        @if (subiuDeNivel) {
+          <span class="level-up-badge">⭐ SUBIU DE NÍVEL!</span>
+        }
+      </div>
+
+      <p>
+        {{
+          aprovado
+            ? 'Você dominou a geografia deste continente. O carimbo é seu!'
+            : 'Volte para a sala de estudos. Você precisa de ' + MINIMO_APROVACAO + ' acertos.'
+        }}
+      </p>
+
+      <div class="result-actions">
+        <button class="btn-brutal" (click)="iniciarJogo()">🔁 Tentar de Novo</button>
+        @if (aprovado) {
+          <a class="btn-brutal btn-primary" [routerLink]="['/home']"> 🌍 Voltar ao Mapa Global </a>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="quiz-arena card-brutal">
+      <img
+        [src]="silhuetaUrl"
+        alt="Silhueta do País"
+        class="silhouette-display"
+        (error)="lidarComErroImagem($event)"
+      />
+      <h2>De qual país é este território?</h2>
+
+      <div class="options-grid">
+        @for (opcao of opcoes; track opcao) {
+          <button
+            class="btn-brutal option-btn"
+            [class.correct]="jaRespondeu && opcao === nomeCorreto"
+            [class.wrong]="jaRespondeu && opcao !== nomeCorreto && acertou === false"
+            [disabled]="jaRespondeu"
+            (click)="verificarResposta(opcao)"
+          >
+            {{ opcao }}
+          </button>
+        }
+      </div>
+
+      @if (jaRespondeu) {
+        <div class="feedback" [class.feedback-ok]="acertou" [class.feedback-err]="!acertou">
+          {{ acertou ? '✅ Perfeito!' : '❌ Era ' + nomeCorreto }}
+        </div>
+        <button class="btn-brutal" (click)="gerarRodada()">Próxima ➡</button>
+      }
+    </div>
+  }
+</div>
