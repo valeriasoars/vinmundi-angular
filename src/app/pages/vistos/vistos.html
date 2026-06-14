@@ -1,0 +1,68 @@
+<div class="page-wrapper">
+  <header class="card-brutal vistos-header">
+    <a routerLink="/home" class="btn-back">⬅ Voltar ao QG</a>
+    <h1>🛂 O Meu Passaporte</h1>
+    <div class="stats-badge">Conquistados: {{ vistosConquistados.length }}/5</div>
+  </header>
+
+  <div class="card-brutal world-visa-box" [class.unlocked]="mundoDesbloqueado">
+    <div class="world-content">
+      <h2>🌍 VISTO MUNDIAL</h2>
+      <p>A aprovação suprema. Exige domínio total de todos os continentes.</p>
+
+      @if (mundoDesbloqueado) {
+        <div class="unlock-alert">🎉 TODOS OS VISTOS OBTIDOS!</div>
+        <button class="btn-brutal btn-world">▶ Iniciar Desafio Global</button>
+      } @else {
+        <div class="lock-alert">
+          🔒 Bloqueado: Faltam {{ 5 - vistosConquistados.length }} vistos continentais.
+        </div>
+        <button class="btn-brutal" disabled>Em breve...</button>
+      }
+    </div>
+  </div>
+
+  <div class="visas-grid">
+    <div class="visa-column">
+      <h2 class="column-title">✅ Vistos Aprovados</h2>
+
+      @for (visto of vistosConquistados; track visto.id) {
+        <div class="card-brutal visa-card approved">
+          <div class="visa-info">
+            <h3>{{ visto.nome }}</h3>
+            <span class="stamp">APROVADO</span>
+          </div>
+          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]"
+            >Revisitar Área</a
+          >
+        </div>
+      } @empty {
+        <div class="empty-state card-brutal">Nenhum visto aprovado ainda. Comece a explorar!</div>
+      }
+    </div>
+
+    <div class="visa-column">
+      <h2 class="column-title">⏳ Vistos Pendentes</h2>
+
+      @for (visto of vistosPendentes; track visto.id) {
+        <div class="card-brutal visa-card pending">
+          <div class="visa-info">
+            <h3>{{ visto.nome }}</h3>
+            <span class="progress-tag">{{ visto.niveisConcluidos }}/3 Missões</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div
+              class="progress-bar-fill"
+              [style.width.%]="(visto.niveisConcluidos / 3) * 100"
+            ></div>
+          </div>
+          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]"
+            >Continuar Missões</a
+          >
+        </div>
+      } @empty {
+        <div class="empty-state card-brutal">Parabéns! Não há mais continentes pendentes.</div>
+      }
+    </div>
+  </div>
+</div>

@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { Navbar } from "../../components/navbar/navbar";
 import { ContinentBar } from "../../components/continent-bar/continent-bar";
 import { Auth } from '../../service/auth/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, ContinentBar],
+  imports: [Navbar, ContinentBar, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

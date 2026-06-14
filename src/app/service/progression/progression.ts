@@ -43,6 +43,21 @@ export class Progression {
     );
   }
 
+  getAllProgress(): Observable<any[]> {
+    return from(
+      this.supabase.auth.getUser().then(async ({ data: { user } }) => {
+        if (!user) return [];
+        
+        const { data } = await this.supabase
+          .from('continent_progress')
+          .select('region_id, score_flags, score_capitals, score_silhouettes')
+          .eq('user_id', user.id);
+          
+        return data || [];
+      })
+    );
+  }
+
   saveScore(
     regionId: string,
     tipo: 'bandeiras' | 'capitais' | 'silhuetas',
