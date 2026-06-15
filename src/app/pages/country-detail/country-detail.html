@@ -1,82 +1,89 @@
-<nav class="navbar">
-  <a routerLink="/" class="back-link">
-    <i class="fa-solid fa-arrow-left"></i>
-    Voltar
-  </a>
-
-  <a routerLink="/" class="logo">
-    <img src="logo.png" alt="Logo VinMundi" />
-  </a>
-</nav>
-
-@if (country) {
-  <main class="details-container">
-    <h1 class="country-title">{{ country.name.common }}</h1>
-
-    <section class="country-details">
-      <div class="flag-container">
-        <img
-          class="country-flag"
-          [src]="country.flags.svg"
-          [alt]="'Bandeira ' + country.name.common"
-        />
+<div class="page-wrapper">
+  @if (carregando) {
+    <div class="card-brutal loading-box">
+      <h2>⏳ A aceder aos arquivos de inteligência global...</h2>
+    </div>
+  } @else if (pais) {
+    <header class="card-brutal detail-header">
+      <button (click)="voltar()" class="btn-back">⬅ Voltar ao Mapa</button>
+      <div class="title-area">
+        <h1>{{ pais.names?.common }} {{ pais.flag?.emoji }}</h1>
+        <span class="region-badge">{{ pais.region }}</span>
       </div>
+    </header>
 
-      <div class="country-info">
-        <div class="details-grid">
-          <article class="detail-card">
-            <h3>Demografia</h3>
-            <p><strong>População:</strong> {{ country.population }}</p>
-            <p><strong>Área:</strong> {{ country.area }} km²</p>
-            <p><strong>Região:</strong> {{ country.region }}</p>
-          </article>
+    <div class="content-grid">
+      <div class="left-column">
+        <div class="card-brutal image-card">
+          @if (imagemUrl) {
+            <img
+              [src]="imagemUrl"
+              [alt]="'Paisagem de ' + (pais.name?.common || '')"
+              class="api-image"
+            />
+          } @else {
+            <div class="no-image">📷 A satélite está a focar a imagem...</div>
+          }
+        </div>
 
-          <article class="detail-card">
-            <h3>Cultura</h3>
-            <p><strong>Idioma:</strong> {{ getIdiomas() }}</p>
-            <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
-            <p><strong>Fuso Horário:</strong> {{ country.timezones?.[0] }}</p>
-          </article>
-
-          <article class="detail-card">
-            <h3>Economia</h3>
-            <p><strong>Moeda:</strong> {{ getMoedaNome() }}</p>
-            <p><strong>Código:</strong> {{ getMoedaCodigo() }}</p>
-            <p><strong>Prefixo:</strong> {{ getPrefixoTelefone() }}</p>
-          </article>
+        <div class="card-brutal flag-card">
+          <img
+            [src]="pais.flags?.svg || pais.flag?.url_svg"
+            [alt]="'Bandeira Oficial'"
+            class="main-flag"
+          />
         </div>
       </div>
-    </section>
 
-    @if (wikiData) {
-      <section class="wiki-section">
-        <h2>📖 Sobre o País</h2>
+      <div class="right-column">
+        <div class="card-brutal wiki-card">
+          <h2>📖 Enciclopédia (Wikipedia)</h2>
+          <p class="wiki-text">
+            {{ wikipediaText || 'A descodificar registos enciclopédicos...' }}
+          </p>
+        </div>
 
-        <div class="wiki-card">
-          @if (wikiData.originalimage?.source) {
-            <div class="wiki-image-container">
-              <img [src]="imagemPaisUrl" [alt]="wikiData.title" class="wiki-image" />
+        <div class="card-brutal info-card">
+          <h2>📑 Dados de Inteligência</h2>
+          <div class="data-list">
+            <div class="data-item">
+              <span class="data-label">🏛️ Capital</span>
+              <span class="data-value">{{ obterCapital() }}</span>
             </div>
-          }
-
-          <div class="wiki-content">
-            <h3 class="wiki-description">{{ wikiData.description }}</h3>
-
-            <p class="wiki-extract">{{ wikiData.extract }}</p>
-
-            <a [href]="wikiData.content_urls.desktop.page" target="_blank" class="wiki-btn">
-              Ler artigo completo na Wikipedia
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            <div class="data-item">
+              <span class="data-label">👥 População</span>
+              <span class="data-value"
+                >{{ garantirNumero(pais.population) | number: '1.0-0' }} hab.</span
+              >
+            </div>
+            <div class="data-item">
+              <span class="data-label">📏 Área Territorial</span>
+              <span class="data-value">{{ pais.area?.kilometers | number: '1.0-0' }} km²</span>
+            </div>
           </div>
         </div>
-      </section>
-    }
 
-    <section>
-      <app-border-tag [borders]="country.borders || []"></app-border-tag>
-    </section>
-  </main>
-} @else {
-  <div class="loading">A carregar detalhes do país...</div>
-}
+        <div class="card-brutal borders-card">
+          <h2>🗺️ Fronteiras Territoriais</h2>
+          <div class="borders-tags">
+            @for (border of pais.borders; track border) {
+              <span class="border-badge">{{ border }}</span>
+            } @empty {
+              <span class="no-borders"
+                >🌐 Este país não partilha fronteiras terrestres (Ilha).</span
+              >
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-brutal btn-huge" (click)="voltar()">Dossiê Lido e Entendido ✓</button>
+  } @else {
+    <div class="card-brutal error-box">
+      <h2>❌ Registo não encontrado</h2>
+      <p>O país solicitado não existe ou os arquivos foram corrompidos.</p>
+      <button (click)="voltar()" class="btn-brutal">Voltar</button>
+    </div>
+  }
+</div>

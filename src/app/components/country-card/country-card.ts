@@ -10,5 +10,9 @@ import { CountryModel } from '../../models/country-model';
   styleUrl: './country-card.css',
 })
 export class CountryCard {
-@Input() country!: CountryModel;
+  @Input() country!: CountryModel;
+
+  get nomePT(): string {
+    return this.country.names?.translations?.['por']?.common || this.country.names?.common;
+  }
 }

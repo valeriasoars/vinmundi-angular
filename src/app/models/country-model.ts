@@ -2,11 +2,10 @@ export interface CountryModel {
   names: {
     common: string;
     official: string;
-    translations?: {
-      por?: { common: string; official: string };
-    };
+    alternates?: string[];
+    native?: Record<string, { common: string; official: string }>;
+    translations?: Record<string, { common: string; official: string }>; // 👈 era errado antes
   };
-
   codes: {
     alpha_2: string;
     alpha_3: string;
@@ -28,7 +27,10 @@ export interface CountryModel {
   subregion?: string;
   borders?: string[];
 
-
   population?: number;
+  area?: {
+    kilometers: number;
+    miles: number;
+  };
   capitals?: { name: string }[];
 }

@@ -1,36 +1,10 @@
-<!-- @if (countries.length === 0) {
-
-<section class="empty-state">
-    <img
-        src="mapa.png"
-        alt="Exploração de países">
-
-    <p>
-        Comece selecionando um continente ou buscando por um país
-        para explorar seus detalhes.
-    </p>
-</section>
-
-} @else {
-
 <section class="countries-grid">
-
-    @for (country of countries; track $index) {
-        <app-country-card
-            [country]="country">
-        </app-country-card>
-    }
-
-</section>
-
-} -->
-
-<section class="countries-grid">
-
-    @for (country of countries; track $index) {
-        <app-country-card
-            [country]="country">
-        </app-country-card>
-    }
-
+  @for (country of countries; track $index) {
+    <app-country-card
+      [country]="country"
+      [routerLink]="['/country', country.codes.alpha_3]"
+      class="clickable-card"
+    >
+    </app-country-card>
+  }
 </section>

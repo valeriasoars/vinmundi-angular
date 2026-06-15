@@ -2,27 +2,12 @@
 
     <img
         [src]="country.flag.url_svg"
-        [alt]="country.names.common"
+        [alt]="nomePT"
         class="country-flag">
 
     <div class="country-content">
 
-        <h3>{{ country.names.common }}</h3>
-
-        <p>
-            <strong>População:</strong>
-            {{ country.population }}
-        </p>
-
-        <p>
-            <strong>Capital:</strong>
-            {{ country.capitals?.[0]?.name || 'N/A' }}
-        </p>
-
-        <p>
-            <strong>Região:</strong>
-            {{ country.region }}
-        </p>
-
+        <h3>{{ nomePT }}</h3>
+        
     </div>
 </div>
