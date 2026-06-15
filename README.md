@@ -41,10 +41,10 @@ Ao desbloquear os 5 vistos continentais, a arena final é libertada: um teste pa
 |---|---|
 | Front-end | Angular 21 (Standalone Components, Signals, RxJS) |
 | Back-end & Auth | Supabase (PostgreSQL, Supabase Auth) |
-| Dados geográficos | REST Countries API v3.1 |
+| Dados geográficos | REST Countries API v5 |
 | Imagens | Unsplash API |
 | Resumos históricos | Wikipedia REST API |
-| Design | CSS puro — arquitetura Neo-brutalista |
+| Design | CSS puro |
 
 ---
 
@@ -72,7 +72,7 @@ Na pasta `src/environments/`, crie o arquivo `environment.development.ts` com a 
 
 ```typescript
 export const environment = {
-  apiUrl: 'https://restcountries.com/v3.1',
+  apiUrl: 'https://api.restcountries.com',
   restCountriesApiKey: 'SUA_CHAVE_AQUI',
   apiUrlWiki: 'https://pt.wikipedia.org/api/rest_v1/page',
   unsplashUrl: 'https://api.unsplash.com',
