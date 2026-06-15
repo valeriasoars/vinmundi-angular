@@ -185,4 +185,33 @@ export class Progression {
   atualizarPerfil(perfil: { xpTotal: number; nivel: number; xpProximoNivel: number }) {
     this.perfilSubject.next(perfil);
   }
+
+  desbloquearVistoMundial(): Observable<void> {
+    return from(
+      this.supabase.auth.getUser().then(async ({ data: { user } }) => {
+        if (!user) return;
+
+        await this.supabase
+          .from('player_stats')
+          .update({ visto_mundial_desbloqueado: true })
+          .eq('user_id', user.id);
+      })
+    );
+  }
+
+  verificarVistoMundial(): Observable<boolean> {
+    return from(
+      this.supabase.auth.getUser().then(async ({ data: { user } }) => {
+        if (!user) return false;
+
+        const { data } = await this.supabase
+          .from('player_stats')
+          .select('visto_mundial_desbloqueado')
+          .eq('user_id', user.id)
+          .maybeSingle();
+
+        return data?.visto_mundial_desbloqueado || false;
+      })
+    );
+  }
 }

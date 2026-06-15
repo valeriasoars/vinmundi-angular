@@ -10,12 +10,29 @@
       <h2>🌍 VISTO MUNDIAL</h2>
       <p>A aprovação suprema. Exige domínio total de todos os continentes.</p>
 
-      @if (mundoDesbloqueado) {
-        <div class="unlock-alert">🎉 TODOS OS VISTOS OBTIDOS!</div>
-        <button class="btn-brutal btn-world">▶ Iniciar Desafio Global</button>
+      @if (vistoMundialConquistado) {
+        <div class="stamp-wrapper">
+          <div class="stamp-brutal">
+            <div class="stamp-inner">
+              <span class="stamp-date">REGISTO OFICIAL</span>
+              <span class="stamp-title">WORLD CITIZEN</span>
+              <div class="stamp-divider"></div>
+              <span class="stamp-status">CONQUISTADO</span>
+              <span class="stamp-code">ID: {{ vistosConquistados.length }}X99</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-brutal btn-world" [routerLink]="['/quiz-mundial']">🔁 Refazer Desafio Global</button>
+      
+      } @else if (mundoDesbloqueado) {
+        <div class="unlock-alert">
+          🔓 Acesso Global Autorizado!
+        </div>
+        <button class="btn-brutal btn-world" [routerLink]="['/quiz-mundial']">▶ Iniciar Desafio Global</button>
+      
       } @else {
         <div class="lock-alert">
-          🔒 Bloqueado: Faltam {{ 5 - vistosConquistados.length }} vistos continentais.
+          🔒 Faltam {{ 5 - vistosConquistados.length }} vistos continentais.
         </div>
         <button class="btn-brutal" disabled>Em breve...</button>
       }
@@ -32,9 +49,7 @@
             <h3>{{ visto.nome }}</h3>
             <span class="stamp">APROVADO</span>
           </div>
-          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]"
-            >Revisitar Área</a
-          >
+          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]">Revisitar Área</a>
         </div>
       } @empty {
         <div class="empty-state card-brutal">Nenhum visto aprovado ainda. Comece a explorar!</div>
@@ -56,9 +71,7 @@
               [style.width.%]="(visto.niveisConcluidos / 3) * 100"
             ></div>
           </div>
-          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]"
-            >Continuar Missões</a
-          >
+          <a class="btn-brutal btn-small" [routerLink]="['/continente', visto.id]">Continuar Missões</a>
         </div>
       } @empty {
         <div class="empty-state card-brutal">Parabéns! Não há mais continentes pendentes.</div>

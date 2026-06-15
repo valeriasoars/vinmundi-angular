@@ -12,6 +12,7 @@ import { QuizBandeiras } from './pages/quiz/quiz-bandeiras/quiz-bandeiras';
 import { QuizSilhuetas } from './pages/quiz/quiz-silhuetas/quiz-silhuetas/quiz-silhuetas';
 import { QuizCapitais } from './pages/quiz/quiz-capitais/quiz-capitais/quiz-capitais';
 import { Vistos } from './pages/vistos/vistos';
+import { QuizMundial } from './pages/quiz/quiz-mundial/quiz-mundial/quiz-mundial';
 
 export const routes: Routes = [
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'quiz/:regiao/bandeiras', component: QuizBandeiras, canActivate: [authGuard] },
   { path: 'quiz/:regiao/capitais', component: QuizCapitais, canActivate: [authGuard] },
   { path: 'quiz/:regiao/silhuetas', component: QuizSilhuetas, canActivate: [authGuard] },
+  { path: 'quiz-mundial', component: QuizMundial, canActivate: [authGuard] },
 
   { path: 'vistos', component: Vistos, canActivate: [authGuard] },
 

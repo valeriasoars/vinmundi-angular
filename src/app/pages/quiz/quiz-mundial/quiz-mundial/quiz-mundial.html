@@ -1,0 +1,73 @@
+<div class="page-wrapper boss-arena">
+  
+  <header class="card-brutal quiz-header boss-header">
+    <a routerLink="/vistos" class="btn-back text-white">⬅ Fugir do Desafio</a>
+    <h1>🌍 EXAME GLOBAL</h1>
+    @if (jogoIniciado && !jogoFinalizado) {
+      <span class="score-badge">
+        {{ pontuacao }}/{{ rodadaAtual - 1 }} • Rodada {{ rodadaAtual }}/{{ totalRodadas }}
+      </span>
+    }
+  </header>
+
+  <main class="boss-content">
+    
+    @if (carregando) {
+      <div class="card-brutal loading-box boss-card">
+        ⏳ A carregar base de dados mundial...
+      </div>
+    
+    } @else if (!jogoIniciado) {
+      <div class="card-brutal start-box boss-card">
+        <h2>NÍVEL MÁXIMO: O Mundo Inteiro</h2>
+        <p>Este é o teste definitivo. Será testado com bandeiras de <strong>todos os continentes</strong> misturadas.</p>
+        <p>Para obter o Visto Mundial, precisa de <strong>{{ MINIMO_APROVACAO }} acertos</strong> em {{ totalRodadas }} rodadas.</p>
+        <button class="btn-brutal btn-huge btn-start-boss" (click)="iniciarJogo()">▶ INICIAR EXAME</button>
+      </div>
+
+    } @else if (jogoFinalizado) {
+      <div class="card-brutal result-box boss-card">
+        <h2>{{ aprovado ? '🏆 CIDADÃO DO MUNDO!' : '❌ REPROVADO NO EXAME GLOBAL' }}</h2>
+        <p class="score-final">{{ pontuacao }} / {{ totalRodadas }}</p>
+        <p>{{ aprovado ? 'O Visto Mundial é seu. Você dominou a geografia do planeta!' : 'Ainda não está pronto. Estude os continentes e volte.' }}</p>
+
+        <div class="result-actions">
+          <button class="btn-brutal btn-secondary-boss" (click)="iniciarJogo()">🔁 Tentar Novamente</button>
+          <a class="btn-brutal btn-primary-boss" routerLink="/vistos">Voltar ao Passaporte</a>
+        </div>
+      </div>
+
+    } @else {
+      <div class="card-brutal quiz-arena boss-card">
+        <h2>De qual país é esta bandeira?</h2>
+        
+        <div class="flag-display">
+          <img [src]="paisCorreto?.flag?.url_svg" alt="Bandeira Misteriosa" class="quiz-flag" />
+        </div>
+
+        <div class="options-grid">
+          @for (opcao of opcoes; track opcao.codes.alpha_3) {
+            <button
+              class="btn-brutal option-btn"
+              [class.correct]="jaRespondeu && opcao.codes.alpha_3 === paisCorreto?.codes?.alpha_3"
+              [class.wrong]="jaRespondeu && opcao.codes.alpha_3 !== paisCorreto?.codes?.alpha_3 && acertou === false"
+              [disabled]="jaRespondeu"
+              (click)="verificarResposta(opcao)"
+            >
+              {{ opcao.names?.common }}
+            </button>
+          }
+        </div>
+
+        @if (jaRespondeu) {
+          <div class="feedback-area">
+            <div class="feedback" [class.feedback-ok]="acertou" [class.feedback-err]="!acertou">
+              {{ acertou ? '✅ Exato!' : '❌ Era ' + paisCorreto?.names?.common }}
+            </div>
+            <button class="btn-brutal btn-next-boss" (click)="gerarRodada()">Próxima Rodada ➡</button>
+          </div>
+        }
+      </div>
+    }
+  </main>
+</div>

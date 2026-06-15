@@ -29,6 +29,7 @@ export class Vistos implements OnInit {
   vistosConquistados: VistoContinente[] = [];
   vistosPendentes: VistoContinente[] = [];
   mundoDesbloqueado = false;
+  vistoMundialConquistado = false;
 
   ngOnInit() {
     this.progressionService.getAllProgress().subscribe({
@@ -63,6 +64,11 @@ export class Vistos implements OnInit {
         this.mundoDesbloqueado = this.vistosConquistados.length === 5;
         this.cdr.detectChanges();
       }
+    });
+
+    this.progressionService.verificarVistoMundial().subscribe(status => {
+      this.vistoMundialConquistado = status;
+      this.cdr.detectChanges();
     });
   }
 }

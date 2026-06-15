@@ -19,7 +19,7 @@ export class ContinentBar implements OnInit {
   continents: ContinentModel[] = [];
   continenteAtivo: string = '';
 
-  private readonly regioesValidas = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania', 'Antarctic'];
+  private readonly regioesValidas = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
   private readonly traducoesContinentes: Record<string, string> = {
     Africa: 'África',
@@ -27,7 +27,7 @@ export class ContinentBar implements OnInit {
     Asia: 'Ásia',
     Europe: 'Europa',
     Oceania: 'Oceania',
-    Antarctic: 'Antártida',
+    /*Antarctic: 'Antártida',*/
   };
 
   ngOnInit(): void {
