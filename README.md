@@ -30,7 +30,7 @@ O utilizador ganha XP conforme a sua taxa de acerto, subindo de nível.
 ### Passaporte e Vistos
 Ao concluir 3 missões num continente com alta pontuação, o jogador conquista o visto daquela região.
 
-###  Boss Final — Exame Global
+### Exame Global
 Ao desbloquear os 5 vistos continentais, a arena final é libertada: um teste para o usuario conseuistar o visto mundial
 
 ---
